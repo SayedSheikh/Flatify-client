@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import MainLayout from "../Layouts/MainLayout";
 import Home from "../Pages/Home/Home";
 import AddToFindListing from "../Pages/AddToFindListing";
+import MyListingPage from "../Pages/MyListingPage";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/MyListings",
-        element: <p>test</p>,
+        Component: MyListingPage,
       },
       {
         path: "/details/:id",
