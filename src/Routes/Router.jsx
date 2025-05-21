@@ -13,11 +13,26 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: "/test",
+        path: "/AddListing",
+        element: <p>test</p>,
+      },
+      {
+        path: "/BrowseListing",
+        element: <p>test</p>,
+      },
+      {
+        path: "/MyListings",
         element: <p>test</p>,
       },
     ],
   },
 ]);
+
+{
+  /* <Home />
+<Add Listing />
+<Browse Listing />
+<My Listings /> */
+}
 
 export default router;

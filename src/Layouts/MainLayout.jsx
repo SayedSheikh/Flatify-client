@@ -24,12 +24,7 @@ const MainLayout = () => {
 
   return (
     <div>
-      <button
-        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        className="btn">
-        click
-      </button>
-      <Navbar></Navbar>
+      <Navbar theme={theme} setTheme={setTheme}></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>
     </div>
