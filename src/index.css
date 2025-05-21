@@ -3,5 +3,15 @@
   themes: light --default, dark;
 }
 @plugin "daisyui/theme" {
-  --color-primary: #605dff;
+  name: "light";
+  /* --color-primary: #605dff; */
+  --color-primary: #04b7ef;
+  --color-secondary: #f43098;
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  /* --color-primary: #605dff; */
+  --color-primary: #04b7ef;
+  --color-secondary: #f43098;
 }
