@@ -3,6 +3,8 @@ import MainLayout from "../Layouts/MainLayout";
 import Home from "../Pages/Home/Home";
 import AddToFindListing from "../Pages/AddToFindListing";
 import MyListingPage from "../Pages/MyListingPage";
+import LogIn from "../Pages/LogIn";
+import SignUp from "../Pages/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "/details/:id",
         element: <p>test</p>,
+      },
+      {
+        path: "/login",
+        Component: LogIn,
+      },
+      {
+        path: "/signup",
+        Component: SignUp,
       },
     ],
   },
