@@ -47,7 +47,9 @@ const AddToFindListing = () => {
       <h2 className="text-2xl font-bold mb-6 text-center">
         Add Roommate Listing
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-3">
         <input
           type="text"
           name="title"
@@ -91,7 +93,7 @@ const AddToFindListing = () => {
           <option value="Shared">Shared</option>
         </select>
 
-        <div>
+        <div className="md:col-span-2">
           <label className="block font-semibold mb-2">
             Lifestyle Preferences:
           </label>
@@ -118,7 +120,7 @@ const AddToFindListing = () => {
           placeholder="Description"
           value={formData.description}
           onChange={handleChange}
-          className="textarea textarea-bordered w-full"
+          className="textarea textarea-bordered w-full md:col-span-2"
           rows={4}
           required
         />
@@ -129,11 +131,11 @@ const AddToFindListing = () => {
           placeholder="Contact Info"
           value={formData.contact}
           onChange={handleChange}
-          className="input input-bordered w-full"
+          className="input input-bordered w-full md:col-span-2"
           required
         />
 
-        <div className="form-control">
+        <div className="form-control md:col-span-2">
           <label className="label cursor-pointer">
             <span className="label-text">Available?</span>
             <input
@@ -150,7 +152,24 @@ const AddToFindListing = () => {
           </label>
         </div>
 
-        <button type="submit" className="btn btn-primary w-full">
+        <input
+          type="text"
+          name="rent"
+          placeholder="Rent Amount"
+          value={"sayed@mail.com"}
+          className="input input-bordered w-full"
+          readOnly
+        />
+        <input
+          type="text"
+          name="rent"
+          placeholder="Rent Amount"
+          value={"sayed"}
+          className="input input-bordered w-full"
+          readOnly
+        />
+
+        <button type="submit" className="btn btn-primary w-full md:col-span-2">
           Submit Listing
         </button>
       </form>
