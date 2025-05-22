@@ -2,6 +2,8 @@ import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../Contexts/AuthContext";
 import { Link, useLoaderData, useNavigate } from "react-router";
 import { IoReturnDownBack } from "react-icons/io5";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const Update = () => {
   const { user } = use(AuthContext);
@@ -18,7 +20,7 @@ const Update = () => {
   const [formData, setFormData] = useState({
     title: info?.title || "",
     location: info?.location || "",
-    rentAmount: info?.rentAmount * 1 || "",
+    rentAmount: info?.rentAmount || "",
     roomType: info?.roomType || "",
     lifestylePreferences: {
       pets: info?.lifestylePreferences?.pets ?? false,
@@ -54,18 +56,28 @@ const Update = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/flatify", {
-      method: "post",
+    fetch(`http://localhost:3000/flatify/${info._id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        if (data.modifiedCount) {
+          Swal.fire({
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          console.log("no modification");
+          toast.error("no modification");
+        }
+      })
       .catch((err) => console.log(err));
-
-    // TODO: Send `formData` to the backend API
   };
   if (!user)
     return (

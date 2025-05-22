@@ -2,6 +2,7 @@ import React, { use, useState } from "react";
 import { AuthContext } from "../Contexts/AuthContext";
 import { Link } from "react-router";
 import { IoReturnDownBack } from "react-icons/io5";
+import Swal from "sweetalert2";
 
 const AddToFindListing = () => {
   const { user } = use(AuthContext);
@@ -53,7 +54,30 @@ const AddToFindListing = () => {
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setFormData({
+            title: "",
+            location: "",
+            rentAmount: "",
+            roomType: "",
+            lifestylePreferences: {
+              pets: false,
+              smoking: false,
+              nightOwl: false,
+            },
+            description: "",
+            contactInfo: "",
+            availability: true,
+          });
+        }
+      })
       .catch((err) => console.log(err));
 
     // TODO: Send `formData` to the backend API

@@ -9,9 +9,10 @@ import {
 } from "react-icons/md";
 import { FaSmokingBan, FaSmoking } from "react-icons/fa";
 import { BsDoorOpen } from "react-icons/bs";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiFillLike, AiOutlineHeart } from "react-icons/ai";
 import { Link, useLoaderData } from "react-router";
 import { IoReturnDownBack } from "react-icons/io5";
+import { SlLike } from "react-icons/sl";
 
 const Details = () => {
   const [liked, setLiked] = useState(false);
@@ -60,28 +61,44 @@ const Details = () => {
         <IoReturnDownBack className="self-end" />
         Back
       </Link>
+      <h1 className="text-[20px] font-bold text-secondary">
+        10 people Intrested
+      </h1>
       <div className="max-w-4xl mx-auto p-6 bg-base-100 shadow-sm shadow-primary rounded-2xl my-10 ">
         {/* Header */}
-        <div className="flex flex-col-reverse md:flex-row justify-between items-center mb-6">
-          <h1 className="text-4xl font-bold text-secondary">
-            {roommate.title}
-          </h1>
+
+        <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+          <div>
+            <h1 className="text-4xl font-bold text-primary">
+              {roommate.title}
+            </h1>
+          </div>
           <button
-            onClick={() => setLiked(!liked)}
-            className="text-3xl transition duration-300 hover:scale-110 self-start md:self-end"
+            onClick={() => setLiked(true)}
+            className="text-3xl transition duration-300 hover:scale-110 self-start md:self-end mt-[10px] cursor-pointer active:scale-90 text-blue-600"
             aria-label="Like">
-            {liked ? (
-              <AiFillHeart className="text-error cursor-pointer" />
-            ) : (
-              <AiOutlineHeart className="text-base-content cursor-pointer" />
-            )}
+            <AiFillLike size={40} />
           </button>
         </div>
 
         {/* Location */}
-        <p className="flex items-center gap-2 text-lg text-base-content mb-4">
-          <MdLocationOn className="text-info text-xl" /> {roommate.location}
-        </p>
+        <div className="flex flex-col-reverse md:flex-row items-start justify-between">
+          <p className="flex items-center gap-2 text-lg text-base-content mb-4">
+            <MdLocationOn className="text-info text-xl" /> {roommate.location}
+          </p>
+
+          {liked && (
+            <p className="flex items-center gap-2">
+              <MdPhone className="text-info text-xl" />
+
+              <a
+                href={`tel:${roommate.contactInfo}`}
+                className="link link-hover">
+                {roommate.contactInfo}
+              </a>
+            </p>
+          )}
+        </div>
 
         {/* Description */}
         <p className="mb-6 text-base">{roommate.description}</p>
@@ -153,13 +170,7 @@ const Details = () => {
             <span className="text-primary font-medium">Name:</span>{" "}
             {roommate.name}
           </p>
-          <p className="flex items-center gap-2">
-            <MdPhone className="text-info text-xl" />
 
-            <a href={`tel:${roommate.contactInfo}`} className="link link-hover">
-              {roommate.contactInfo}
-            </a>
-          </p>
           <p className="flex items-center gap-2">
             <MdEmail className="text-info text-xl" />
 
