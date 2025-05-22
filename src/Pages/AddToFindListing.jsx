@@ -128,7 +128,7 @@ const AddToFindListing = () => {
         <input
           type="text"
           name="contact"
-          placeholder="Contact Info"
+          placeholder="Contact Number"
           value={formData.contact}
           onChange={handleChange}
           className="input input-bordered w-full md:col-span-2"

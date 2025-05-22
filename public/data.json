@@ -1,0 +1,121 @@
+[
+  {
+    "id": 1,
+    "title": "Looking for a roommate in Dhanmondi",
+    "location": "Dhanmondi, Dhaka",
+    "rentAmount": "8500 BDT/month",
+    "roomType": "Shared",
+    "lifestylePreferences": {
+      "pets": false,
+      "smoking": "No",
+      "nightOwl": true
+    },
+    "availability": true,
+    "contactInfo": "",
+    "name": "Tanvir Ahmed",
+    "email": "tanvir.dhanmondi@gmail.com",
+    "description": "Spacious and clean flat in Dhanmondi. Looking for a student or working professional. Wi-Fi, washing machine, and gas available. Bills shared equally."
+  },
+  {
+    "id": 2,
+    "title": "Roommate wanted near GEC Circle",
+    "location": "GEC Circle, Chattogram",
+    "rentAmount": "6000 BDT/month",
+    "roomType": "Single",
+    "lifestylePreferences": {
+      "pets": true,
+      "smoking": "Occasionally",
+      "nightOwl": false
+    },
+    "availability": true,
+    "contactInfo": "",
+    "name": "Nafisa Kabir",
+    "email": "nafisa.gec@gmail.com",
+    "description": "Single room available with attached bath and balcony. 3rd floor apartment with lift and generator. Prefer calm and clean person."
+  },
+  {
+    "id": 3,
+    "title": "Shared room available in Uttara",
+    "location": "Uttara, Dhaka",
+    "rentAmount": "7000 BDT/month",
+    "roomType": "Shared",
+    "lifestylePreferences": {
+      "pets": false,
+      "smoking": "No",
+      "nightOwl": false
+    },
+    "availability": false,
+    "contactInfo": "",
+    "name": "Mehedi Hasan",
+    "email": "mehedi.uttara@gmail.com",
+    "description": "Fully furnished apartment near Rajlaxmi. High-speed internet, fridge, and security included. Only 1 roommate needed."
+  },
+  {
+    "id": 4,
+    "title": "Student roommate wanted in Mohammadpur",
+    "location": "Mohammadpur, Dhaka",
+    "rentAmount": "5000 BDT/month",
+    "roomType": "Shared",
+    "lifestylePreferences": {
+      "pets": false,
+      "smoking": "No",
+      "nightOwl": true
+    },
+    "availability": true,
+    "contactInfo": "",
+    "name": "Arif Hossain",
+    "email": "arif.mohammadpur@gmail.com",
+    "description": "Close to bus stops and grocery stores. Students preferred. Calm and clean environment. Water, gas included."
+  },
+  {
+    "id": 5,
+    "title": "Room in Bashundhara R/A",
+    "location": "Bashundhara, Dhaka",
+    "rentAmount": "10000 BDT/month",
+    "roomType": "Single",
+    "lifestylePreferences": {
+      "pets": true,
+      "smoking": "No",
+      "nightOwl": false
+    },
+    "availability": true,
+    "contactInfo": "",
+    "name": "Zahidul Islam",
+    "email": "zahid.bashundhara@gmail.com",
+    "description": "Well-furnished room in gated community. All utilities included. Parking space available. Ideal for professionals."
+  },
+  {
+    "id": 6,
+    "title": "Female roommate needed in Khulshi",
+    "location": "Khulshi, Chattogram",
+    "rentAmount": "4500 BDT/month",
+    "roomType": "Shared",
+    "lifestylePreferences": {
+      "pets": false,
+      "smoking": "No",
+      "nightOwl": false
+    },
+    "availability": true,
+    "contactInfo": "",
+    "name": "Rima Aktar",
+    "email": "rima.khulshi@gmail.com",
+    "description": "Clean and secure apartment. Only for female students or job holders. Kitchen and Wi-Fi shared."
+  },
+  {
+    "id": 7,
+    "title": "Shared room for students in Sylhet",
+    "location": "Zindabazar, Sylhet",
+    "rentAmount": "4000 BDT/month",
+    "roomType": "Shared",
+    "lifestylePreferences": {
+      "pets": false,
+      "smoking": "No",
+      "nightOwl": true
+    },
+    "availability": true,
+    "contactInfo": "",
+    "name": "Rahat Miah",
+    "email": "rahat.sylhet@gmail.com",
+    "description": "Ideal for university students. Shared bathroom and kitchen. Walking distance to Shahjalal University bus stop."
+  }
+]

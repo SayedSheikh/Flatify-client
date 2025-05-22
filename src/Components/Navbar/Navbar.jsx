@@ -1,12 +1,44 @@
-import React from "react";
+import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import "./Navbar.css";
 import lightLogo from "/logoBGWhite.png";
 import nightLogo from "/nightLogo.png";
-import { MdLightMode, MdModeNight } from "react-icons/md";
-import { FaMoon } from "react-icons/fa";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 const Navbar = ({ theme, setTheme }) => {
+  const { user, logOut } = use(AuthContext);
+
+  const handleSignOut = () => {
+    logOut()
+      .then(() => console.log("Signout"))
+      .catch((err) => console.log(err));
+  };
+
+  const profile = (
+    <>
+      <div className="dropdown dropdown-end">
+        <div className="tooltip tooltip-bottom" data-tip={user?.displayName}>
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar">
+            <div className="w-10 rounded-full">
+              <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
+            </div>
+          </div>
+        </div>
+
+        <ul
+          tabIndex={0}
+          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+          <li onClick={handleSignOut}>
+            <a>Logout</a>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+
   const themeChange = (
     <>
       <label className="swap swap-rotate">
@@ -112,8 +144,18 @@ const Navbar = ({ theme, setTheme }) => {
         <div className="navbar-end gap-[4px]">
           <div className="hidden sm:block">{themeChange}</div>
 
-          <a className="btn btn-primary btn-outline">Login</a>
-          <a className="btn btn-primary">SignUp</a>
+          {user ? (
+            profile
+          ) : (
+            <>
+              <Link to="/login" className="btn btn-primary btn-outline">
+                Login
+              </Link>
+              <Link to="/signup" className="btn btn-primary">
+                SignUp
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

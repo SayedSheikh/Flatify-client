@@ -1,81 +1,89 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { FaLocationDot } from "react-icons/fa6";
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { Link } from "react-router";
 
 // Sample JSON data (normally this would come from props or an API)
-const allPosts = [
-  {
-    id: 1,
-    title: "Looking for a roommate in Dhanmondi",
-    location: "Dhanmondi, Dhaka",
-    rentAmount: "8500 BDT/month",
-    roomType: "Shared",
-    lifestylePreferences: { pets: false, smoking: "No", nightOwl: true },
-    availability: true,
-  },
-  {
-    id: 2,
-    title: "Roommate wanted near GEC Circle",
-    location: "GEC Circle, Chattogram",
-    rentAmount: "6000 BDT/month",
-    roomType: "Single",
-    lifestylePreferences: {
-      pets: true,
-      smoking: "Occasionally",
-      nightOwl: false,
-    },
-    availability: true,
-  },
-  {
-    id: 3,
-    title: "Shared room available in Uttara",
-    location: "Uttara, Dhaka",
-    rentAmount: "7000 BDT/month",
-    roomType: "Shared",
-    lifestylePreferences: { pets: false, smoking: "No", nightOwl: false },
-    availability: false,
-  },
-  {
-    id: 4,
-    title: "Student roommate wanted in Mohammadpur",
-    location: "Mohammadpur, Dhaka",
-    rentAmount: "5000 BDT/month",
-    roomType: "Shared",
-    lifestylePreferences: { pets: false, smoking: "No", nightOwl: true },
-    availability: true,
-  },
-  {
-    id: 5,
-    title: "Room in Bashundhara R/A",
-    location: "Bashundhara, Dhaka",
-    rentAmount: "10000 BDT/month",
-    roomType: "Single",
-    lifestylePreferences: { pets: true, smoking: "No", nightOwl: false },
-    availability: true,
-  },
-  {
-    id: 6,
-    title: "Female roommate needed in Khulshi",
-    location: "Khulshi, Chattogram",
-    rentAmount: "4500 BDT/month",
-    roomType: "Shared",
-    lifestylePreferences: { pets: false, smoking: "No", nightOwl: false },
-    availability: true,
-  },
-  {
-    id: 7,
-    title: "Shared room for students in Sylhet",
-    location: "Zindabazar, Sylhet",
-    rentAmount: "4000 BDT/month",
-    roomType: "Shared",
-    lifestylePreferences: { pets: false, smoking: "No", nightOwl: true },
-    availability: true,
-  },
-];
+// const allPosts = [
+//   {
+//     id: 1,
+//     title: "Looking for a roommate in Dhanmondi",
+//     location: "Dhanmondi, Dhaka",
+//     rentAmount: "8500 BDT/month",
+//     roomType: "Shared",
+//     lifestylePreferences: { pets: false, smoking: "No", nightOwl: true },
+//     availability: true,
+//   },
+//   {
+//     id: 2,
+//     title: "Roommate wanted near GEC Circle",
+//     location: "GEC Circle, Chattogram",
+//     rentAmount: "6000 BDT/month",
+//     roomType: "Single",
+//     lifestylePreferences: {
+//       pets: true,
+//       smoking: "Occasionally",
+//       nightOwl: false,
+//     },
+//     availability: true,
+//   },
+//   {
+//     id: 3,
+//     title: "Shared room available in Uttara",
+//     location: "Uttara, Dhaka",
+//     rentAmount: "7000 BDT/month",
+//     roomType: "Shared",
+//     lifestylePreferences: { pets: false, smoking: "No", nightOwl: false },
+//     availability: false,
+//   },
+//   {
+//     id: 4,
+//     title: "Student roommate wanted in Mohammadpur",
+//     location: "Mohammadpur, Dhaka",
+//     rentAmount: "5000 BDT/month",
+//     roomType: "Shared",
+//     lifestylePreferences: { pets: false, smoking: "No", nightOwl: true },
+//     availability: true,
+//   },
+//   {
+//     id: 5,
+//     title: "Room in Bashundhara R/A",
+//     location: "Bashundhara, Dhaka",
+//     rentAmount: "10000 BDT/month",
+//     roomType: "Single",
+//     lifestylePreferences: { pets: true, smoking: "No", nightOwl: false },
+//     availability: true,
+//   },
+//   {
+//     id: 6,
+//     title: "Female roommate needed in Khulshi",
+//     location: "Khulshi, Chattogram",
+//     rentAmount: "4500 BDT/month",
+//     roomType: "Shared",
+//     lifestylePreferences: { pets: false, smoking: "No", nightOwl: false },
+//     availability: true,
+//   },
+//   {
+//     id: 7,
+//     title: "Shared room for students in Sylhet",
+//     location: "Zindabazar, Sylhet",
+//     rentAmount: "4000 BDT/month",
+//     roomType: "Shared",
+//     lifestylePreferences: { pets: false, smoking: "No", nightOwl: true },
+//     availability: true,
+//   },
+// ];
 
 const Featured = () => {
+  const [allPosts, setAllPosts] = useState([]);
+
+  useEffect(() => {
+    fetch("/data.json")
+      .then((res) => res.json())
+      .then((data) => setAllPosts(data));
+  }, [setAllPosts]);
+
   const availablePosts = allPosts
     .filter((post) => post.availability)
     .slice(0, 6);
@@ -104,7 +112,7 @@ const Featured = () => {
       <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-secondary">
         Featured Roommate Posts
       </h2>
-
+      {allPosts.length === 0 && <p>Loading...</p>}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {availablePosts.map((post) => (
           <div

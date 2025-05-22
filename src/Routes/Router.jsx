@@ -27,6 +27,8 @@ const router = createBrowserRouter([
       {
         path: "/MyListings",
         Component: MyListingPage,
+        loader: () => fetch("/data.json"),
+        hydrateFallbackElement: <p>Loading...</p>,
       },
       {
         path: "/details/:id",

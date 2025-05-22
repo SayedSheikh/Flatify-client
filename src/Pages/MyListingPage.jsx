@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLoaderData } from "react-router";
 
 const mockUserEmail = "your.email@example.com"; // Replace with actual authenticated user's email
 
@@ -44,13 +45,15 @@ const mockListings = [
 ];
 
 const MyListingPage = () => {
-  const [listings, setListings] = useState([]);
+  const data = useLoaderData();
+  console.log(data);
+  const [listings, setListings] = useState(data);
 
-  useEffect(() => {
-    // Simulate fetch + filter by logged-in user
-    const userListings = [...mockListings];
-    setListings(userListings);
-  }, []);
+  // useEffect(() => {
+  //   // Simulate fetch + filter by logged-in user
+  //   const userListings = [...data];
+  //   setListings(userListings);
+  // }, []);
 
   const handleDelete = (index) => {
     if (confirm("Are you sure you want to delete this listing?")) {
@@ -67,7 +70,7 @@ const MyListingPage = () => {
 
   return (
     <div className="overflow-x-auto max-w-6xl mx-auto px-4 py-8 min-h-[calc(100vh-65px)]">
-      <h2 className="text-2xl font-bold mb-4 text-center">
+      <h2 className="text-2xl font-bold mb-4 text-center text-secondary">
         My Roommate Listings
       </h2>
       {listings.length === 0 ? (
