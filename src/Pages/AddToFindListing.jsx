@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
+import { AuthContext } from "../Contexts/AuthContext";
 
 const AddToFindListing = () => {
+  const { user } = use(AuthContext);
   const [formData, setFormData] = useState({
     title: "",
     location: "",
@@ -42,6 +44,13 @@ const AddToFindListing = () => {
     // TODO: Send `formData` to the backend API
   };
 
+  if (!user)
+    return (
+      <div className="min-h-[calc(100vh-65px)] flex items-center justify-center">
+        <span className="loading loading-bars w-[50px] text-primary"></span>
+      </div>
+    );
+
   return (
     <div className="max-w-4xl mx-auto w-11/12 p-8 shadow-lg bg-white dark:bg-base-200 rounded-xl my-[60px]">
       <h2 className="text-2xl font-bold mb-6 text-center">
@@ -50,48 +59,57 @@ const AddToFindListing = () => {
       <form
         onSubmit={handleSubmit}
         className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-3">
-        <input
-          type="text"
-          name="title"
-          placeholder="Listing Title"
-          value={formData.title}
-          onChange={handleChange}
-          className="input input-bordered w-full"
-          required
-        />
-
-        <input
-          type="text"
-          name="location"
-          placeholder="Location"
-          value={formData.location}
-          onChange={handleChange}
-          className="input input-bordered w-full"
-          required
-        />
-
-        <input
-          type="number"
-          name="rent"
-          placeholder="Rent Amount"
-          value={formData.rent}
-          onChange={handleChange}
-          className="input input-bordered w-full"
-          required
-        />
-
-        <select
-          name="roomType"
-          value={formData.roomType}
-          onChange={handleChange}
-          className="select select-bordered w-full"
-          required>
-          <option disabled value="">
-            Select Room Type
-          </option>
-          <option value="Single">Single</option>
-          <option value="Shared">Shared</option>
-        </select>
+        <div>
+          <label className="label">Listing Title</label>
+          <input
+            type="text"
+            name="title"
+            placeholder="Listing Title"
+            value={formData.title}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
+        <div>
+          <label className="label">Location</label>
+          <input
+            type="text"
+            name="location"
+            placeholder="Location"
+            value={formData.location}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
+        <div>
+          <label className="label">Rent Amount</label>
+          <input
+            type="number"
+            name="rent"
+            placeholder="Rent Amount"
+            value={formData.rent}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
+        <div>
+          <label className="label">Room Type</label>
+          <select
+            name="roomType"
+            value={formData.roomType}
+            onChange={handleChange}
+            className="select select-bordered w-full cursor-pointer"
+            required>
+            <option disabled value="">
+              Select Room Type
+            </option>
+            <option value="Single">Single</option>
+            <option value="Shared">Shared</option>
+          </select>
+        </div>
 
         <div className="md:col-span-2">
           <label className="block font-semibold mb-2">
@@ -155,16 +173,16 @@ const AddToFindListing = () => {
         <input
           type="text"
           name="rent"
-          placeholder="Rent Amount"
-          value={"sayed@mail.com"}
+          placeholder="UserName"
+          value={user?.displayName}
           className="input input-bordered w-full"
           readOnly
         />
         <input
           type="text"
           name="rent"
-          placeholder="Rent Amount"
-          value={"sayed"}
+          placeholder="email"
+          value={user?.email}
           className="input input-bordered w-full"
           readOnly
         />

@@ -17,7 +17,7 @@ const Navbar = ({ theme, setTheme }) => {
   const profile = (
     <>
       <div className="dropdown dropdown-end">
-        <div className="tooltip tooltip-bottom" data-tip={user?.displayName}>
+        <div className="tooltip tooltip-left" data-tip={user?.displayName}>
           <div
             tabIndex={0}
             role="button"
@@ -142,8 +142,6 @@ const Navbar = ({ theme, setTheme }) => {
           <ul className="menu menu-horizontal px-1">{link}</ul>
         </div>
         <div className="navbar-end gap-[4px]">
-          <div className="hidden sm:block">{themeChange}</div>
-
           {user ? (
             profile
           ) : (
@@ -156,6 +154,7 @@ const Navbar = ({ theme, setTheme }) => {
               </Link>
             </>
           )}
+          <div className="hidden sm:block">{themeChange}</div>
         </div>
       </div>
     </div>

@@ -5,6 +5,8 @@ import AddToFindListing from "../Pages/AddToFindListing";
 import MyListingPage from "../Pages/MyListingPage";
 import LogIn from "../Pages/LogIn";
 import SignUp from "../Pages/SignUp";
+import BrowseListing from "../Pages/BrowseListing";
+import Details from "../Pages/Details";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +24,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/BrowseListing",
-        element: <p>test</p>,
+        Component: BrowseListing,
+        loader: () => fetch("/data.json"),
+        hydrateFallbackElement: <p>Loading...</p>,
       },
       {
         path: "/MyListings",
@@ -32,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <p>test</p>,
+        Component: Details,
       },
       {
         path: "/login",
