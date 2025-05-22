@@ -49,7 +49,9 @@ const Reviews = () => {
         <h2 className="text-3xl font-bold text-secondary self-start">
           What Our Users Say
         </h2>
-        <button className="btn btn-primary self-end">Give Your Review</button>
+        <button className="btn btn-outline btn-primary self-end">
+          Give Your Review
+        </button>
       </div>
 
       <div className="flex flex-wrap gap-2 ">

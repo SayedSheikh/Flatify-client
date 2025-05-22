@@ -7,11 +7,11 @@
     "roomType": "Shared",
     "lifestylePreferences": {
       "pets": false,
-      "smoking": "No",
+      "smoking": false,
       "nightOwl": true
     },
     "availability": true,
-    "contactInfo": "",
+    "contactInfo": "1234567911",
     "name": "Tanvir Ahmed",
     "email": "tanvir.dhanmondi@gmail.com",
     "description": "Spacious and clean flat in Dhanmondi. Looking for a student or working professional. Wi-Fi, washing machine, and gas available. Bills shared equally."
@@ -24,11 +24,11 @@
     "roomType": "Single",
     "lifestylePreferences": {
       "pets": true,
-      "smoking": "Occasionally",
+      "smoking": true,
       "nightOwl": false
     },
     "availability": true,
-    "contactInfo": "",
+    "contactInfo": "1234567911",
     "name": "Nafisa Kabir",
     "email": "nafisa.gec@gmail.com",
     "description": "Single room available with attached bath and balcony. 3rd floor apartment with lift and generator. Prefer calm and clean person."
@@ -41,11 +41,11 @@
     "roomType": "Shared",
     "lifestylePreferences": {
       "pets": false,
-      "smoking": "No",
+      "smoking": false,
       "nightOwl": false
     },
     "availability": false,
-    "contactInfo": "",
+    "contactInfo": "1234567911",
     "name": "Mehedi Hasan",
     "email": "mehedi.uttara@gmail.com",
     "description": "Fully furnished apartment near Rajlaxmi. High-speed internet, fridge, and security included. Only 1 roommate needed."
@@ -58,11 +58,11 @@
     "roomType": "Shared",
     "lifestylePreferences": {
       "pets": false,
-      "smoking": "No",
+      "smoking": false,
       "nightOwl": true
     },
     "availability": true,
-    "contactInfo": "",
+    "contactInfo": "1234567911",
     "name": "Arif Hossain",
     "email": "arif.mohammadpur@gmail.com",
     "description": "Close to bus stops and grocery stores. Students preferred. Calm and clean environment. Water, gas included."
@@ -75,11 +75,11 @@
     "roomType": "Single",
     "lifestylePreferences": {
       "pets": true,
-      "smoking": "No",
+      "smoking": false,
       "nightOwl": false
     },
     "availability": true,
-    "contactInfo": "",
+    "contactInfo": "1234567911",
     "name": "Zahidul Islam",
     "email": "zahid.bashundhara@gmail.com",
     "description": "Well-furnished room in gated community. All utilities included. Parking space available. Ideal for professionals."
@@ -92,11 +92,11 @@
     "roomType": "Shared",
     "lifestylePreferences": {
       "pets": false,
-      "smoking": "No",
+      "smoking": false,
       "nightOwl": false
     },
     "availability": true,
-    "contactInfo": "",
+    "contactInfo": "1234567911",
     "name": "Rima Aktar",
     "email": "rima.khulshi@gmail.com",
     "description": "Clean and secure apartment. Only for female students or job holders. Kitchen and Wi-Fi shared."
@@ -109,11 +109,11 @@
     "roomType": "Shared",
     "lifestylePreferences": {
       "pets": false,
-      "smoking": "No",
+      "smoking": false,
       "nightOwl": true
     },
     "availability": true,
-    "contactInfo": "",
+    "contactInfo": "1234567911",
     "name": "Rahat Miah",
     "email": "rahat.sylhet@gmail.com",
     "description": "Ideal for university students. Shared bathroom and kitchen. Walking distance to Shahjalal University bus stop."

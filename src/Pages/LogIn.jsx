@@ -1,10 +1,18 @@
 import React, { use, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
 
 const LogIn = () => {
   const [error, setError] = useState("");
   const { SignIn, googleSignIn } = use(AuthContext);
+  const navigate = useNavigate("/");
+
+  const handleGoogleSignIn = () => {
+    setError("");
+    googleSignIn()
+      .then(() => navigate("/"))
+      .catch((err) => setError(err.code));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
@@ -51,7 +59,9 @@ const LogIn = () => {
               Login
             </button>
           </form>
-          <button className="btn bg-white text-black border-primary">
+          <button
+            onClick={handleGoogleSignIn}
+            className="btn bg-white text-black border-primary">
             <svg
               aria-label="Google logo"
               width="16"

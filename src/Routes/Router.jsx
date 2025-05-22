@@ -7,12 +7,14 @@ import LogIn from "../Pages/LogIn";
 import SignUp from "../Pages/SignUp";
 import BrowseListing from "../Pages/BrowseListing";
 import Details from "../Pages/Details";
+import Update from "../Pages/Update";
+import Error from "../Pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
-    errorElement: <p>Error occured..</p>,
+    errorElement: <Error></Error>,
     children: [
       {
         index: true,
@@ -25,18 +27,30 @@ const router = createBrowserRouter([
       {
         path: "/BrowseListing",
         Component: BrowseListing,
-        loader: () => fetch("/data.json"),
+        loader: () => fetch("http://localhost:3000/flatify"),
         hydrateFallbackElement: <p>Loading...</p>,
       },
       {
         path: "/MyListings",
         Component: MyListingPage,
-        loader: () => fetch("/data.json"),
+        // loader: () => fetch("/data.json"),
+        // hydrateFallbackElement: <p>Loading...</p>,
+      },
+      {
+        path: "/MyListings/update/:id",
+        Component: Update,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/flatify/${params.id}`),
+
         hydrateFallbackElement: <p>Loading...</p>,
       },
       {
         path: "/details/:id",
         Component: Details,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/flatify/${params.id}`),
+
+        hydrateFallbackElement: <p>Loading...</p>,
       },
       {
         path: "/login",

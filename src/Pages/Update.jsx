@@ -1,24 +1,33 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../Contexts/AuthContext";
-import { Link } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
 import { IoReturnDownBack } from "react-icons/io5";
 
-const AddToFindListing = () => {
+const Update = () => {
   const { user } = use(AuthContext);
+  const info = useLoaderData();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (info.message === "Invalid ID format" || info === "") {
+      navigate("/MyListings");
+    }
+  }, [info, navigate]);
 
   const [formData, setFormData] = useState({
-    title: "",
-    location: "",
-    rentAmount: "",
-    roomType: "",
+    title: info?.title || "",
+    location: info?.location || "",
+    rentAmount: info?.rentAmount * 1 || "",
+    roomType: info?.roomType || "",
     lifestylePreferences: {
-      pets: false,
-      smoking: false,
-      nightOwl: false,
+      pets: info?.lifestylePreferences?.pets ?? false,
+      smoking: info?.lifestylePreferences?.smoking ?? false,
+      nightOwl: info?.lifestylePreferences?.nightOwl ?? false,
     },
-    description: "",
-    contactInfo: "",
-    availability: true,
+    description: info?.description,
+    contactInfo: info?.contactInfo,
+    availability: info?.availability,
   });
 
   const handleChange = (e) => {
@@ -65,12 +74,14 @@ const AddToFindListing = () => {
       </div>
     );
   return (
-    <div className="max-w-4xl mx-auto w-11/12 my-[60px] mb-[100px]">
-      <Link to={"/"} className="flex items-center text-2xl text-primary">
+    <div className="max-w-4xl mx-auto w-11/12 my-[40px]">
+      <Link
+        to={"/MyListings"}
+        className="flex items-center text-2xl text-primary">
         <IoReturnDownBack className="self-end" />
         Back
       </Link>
-      <div className=" p-8 shadow-lg bg-white dark:bg-base-200 rounded-xl my-[30px]">
+      <div className=" p-8 shadow-lg bg-white dark:bg-base-200 rounded-xl my-[40px]">
         <h2 className="text-2xl font-bold mb-6 text-center text-secondary">
           Add Roommate Listing
         </h2>
@@ -104,7 +115,7 @@ const AddToFindListing = () => {
           <div>
             <label className="label">Rent Amount</label>
             <input
-              type="number"
+              type="text"
               name="rentAmount"
               placeholder="Rent Amount"
               value={formData.rentAmount}
@@ -162,7 +173,7 @@ const AddToFindListing = () => {
           />
 
           <input
-            type="text"
+            type="number"
             name="contactInfo"
             placeholder="Contact Number"
             value={formData.contactInfo}
@@ -208,7 +219,7 @@ const AddToFindListing = () => {
           <button
             type="submit"
             className="btn btn-primary w-full md:col-span-2">
-            Submit Listing
+            Update
           </button>
         </form>
       </div>
@@ -216,4 +227,4 @@ const AddToFindListing = () => {
   );
 };
 
-export default AddToFindListing;
+export default Update;

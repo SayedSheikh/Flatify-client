@@ -1,113 +1,131 @@
-import React from "react";
+import { useState } from "react";
+// import { AiFillHeart, AiOutlineHeart } from "react-icons";
 import {
   MdLocationOn,
-  MdOutlineAttachMoney,
-  MdBedroomParent,
-  MdPets,
-  MdSmokingRooms,
-  MdNightlight,
   MdEmail,
+  MdOutlinePets,
+  MdNightlight,
   MdPhone,
-  MdPerson,
-  MdDescription,
 } from "react-icons/md";
+import { FaSmokingBan, FaSmoking } from "react-icons/fa";
+import { BsDoorOpen } from "react-icons/bs";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { Link, useLoaderData } from "react-router";
+import { IoReturnDownBack } from "react-icons/io5";
 
 const Details = () => {
-  const roommate = {
-    id: 1,
-    title: "Looking for a roommate in Dhanmondi",
-    location: "Dhanmondi, Dhaka",
-    rentAmount: "8500 BDT/month",
-    roomType: "Shared",
-    lifestylePreferences: {
-      pets: false,
-      smoking: "No",
-      nightOwl: true,
-    },
-    availability: true,
-    contactInfo: "",
-    name: "Tanvir Ahmed",
-    email: "tanvir.dhanmondi@gmail.com",
-    phone: "+8801781234567",
-    description:
-      "Spacious and clean flat in Dhanmondi. Looking for a student or working professional. Wi-Fi, washing machine, and gas available. Bills shared equally.",
-  };
+  const [liked, setLiked] = useState(false);
+
+  const roommate = useLoaderData();
+  // console.log(roommate);
+
+  if (roommate.message === "Invalid ID format" || roommate === "") {
+    return (
+      <div className="w-11/12 mx-auto max-w-4xl mt-[50px] min-h-[calc(100vh-65px)]">
+        <Link
+          to={"/BrowseListing"}
+          className="flex items-center text-2xl text-primary">
+          <IoReturnDownBack className="self-end" />
+          Back
+        </Link>
+        <div>No Roommate found with that info</div>
+      </div>
+    );
+  }
+
+  // const roommate = {
+  //   id: 1,
+  //   title: "Looking for a roommate in Dhanmondi",
+  //   location: "Dhanmondi, Dhaka",
+  //   rentAmount: "8500 BDT/month",
+  //   roomType: "Shared",
+  //   lifestylePreferences: {
+  //     pets: false,
+  //     smoking: "No",
+  //     nightOwl: true,
+  //   },
+  //   availability: true,
+  //   contactInfo: "01845868514",
+  //   name: "Tanvir Ahmed",
+  //   email: "tanvir.dhanmondi@gmail.com",
+  //   description:
+  //     "Spacious and clean flat in Dhanmondi. Looking for a student or working professional. Wi-Fi, washing machine, and gas available. Bills shared equally.",
+  // };
 
   return (
-    <div className="min-h-[calc(100vh-65px)] w-11/12 mx-auto flex items-center justify-center">
-      <div className="max-w-4xl mx-auto p-6 rounded-lg shadow-sm shadow-primary my-12 bg-base-200 text-base-content ]">
-        <h1 className="text-4xl font-bold mb-6 text-secondary">
-          {roommate.title}
-        </h1>
-
-        {/* Availability Badge */}
-        <div
-          className={`inline-block px-4 py-1 rounded-full font-semibold mb-6 ${
-            roommate.availability
-              ? "bg-success text-success-content"
-              : "bg-error text-error-content"
-          }`}>
-          {roommate.availability ? "Available" : "Not Available"}
+    <div className="w-11/12 mx-auto max-w-4xl mt-[50px]">
+      <Link
+        to={"/BrowseListing"}
+        className="flex items-center text-2xl text-primary">
+        <IoReturnDownBack className="self-end" />
+        Back
+      </Link>
+      <div className="max-w-4xl mx-auto p-6 bg-base-100 shadow-sm shadow-primary rounded-2xl my-10 ">
+        {/* Header */}
+        <div className="flex flex-col-reverse md:flex-row justify-between items-center mb-6">
+          <h1 className="text-4xl font-bold text-secondary">
+            {roommate.title}
+          </h1>
+          <button
+            onClick={() => setLiked(!liked)}
+            className="text-3xl transition duration-300 hover:scale-110 self-start md:self-end"
+            aria-label="Like">
+            {liked ? (
+              <AiFillHeart className="text-error cursor-pointer" />
+            ) : (
+              <AiOutlineHeart className="text-base-content cursor-pointer" />
+            )}
+          </button>
         </div>
 
-        {/* Location, Rent, Room Type */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-          <div className="flex items-center space-x-3">
-            <MdLocationOn className="text-3xl text-secondary" />
-            <span className="text-lg font-medium">{roommate.location}</span>
-          </div>
+        {/* Location */}
+        <p className="flex items-center gap-2 text-lg text-base-content mb-4">
+          <MdLocationOn className="text-info text-xl" /> {roommate.location}
+        </p>
 
-          <div className="flex items-center space-x-3">
-            <MdOutlineAttachMoney className="text-3xl text-accent" />
-            <span className="text-lg font-medium">{roommate.rentAmount}</span>
-          </div>
+        {/* Description */}
+        <p className="mb-6 text-base">{roommate.description}</p>
 
-          <div className="flex items-center space-x-3">
-            <MdBedroomParent className="text-3xl text-info" />
-            <span className="text-lg font-medium">{roommate.roomType}</span>
+        {/* Rent & Room Type */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="flex items-center gap-2 bg-base-200 p-4 rounded-xl">
+            <BsDoorOpen className="text-success text-2xl" />
+            <span className="font-semibold">Room Type:</span>{" "}
+            {roommate.roomType}
+          </div>
+          <div className="flex items-center gap-2 bg-base-200 p-4 rounded-xl">
+            <span className="text-xl text-warning">💸</span>
+            <span className="font-semibold">Rent:</span> {roommate.rentAmount}
           </div>
         </div>
 
         {/* Lifestyle Preferences */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-primary">
-            Lifestyle Preferences
-          </h2>
-          <div className="flex flex-wrap gap-6">
-            <div className="flex items-center space-x-2">
-              <MdPets
-                className={`text-2xl ${
-                  roommate.lifestylePreferences.pets
-                    ? "text-success"
-                    : "text-neutral"
-                }`}
-              />
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold mb-3">Lifestyle Preferences</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="flex items-center gap-2 bg-base-200 p-3 rounded-xl">
+              <MdOutlinePets className="text-pink-600 text-2xl" />
               <span>
                 {roommate.lifestylePreferences.pets
                   ? "Pets Allowed"
                   : "No Pets"}
               </span>
             </div>
-
-            <div className="flex items-center space-x-2">
-              <MdSmokingRooms
-                className={`text-2xl ${
-                  roommate.lifestylePreferences.smoking === "No"
-                    ? "text-neutral"
-                    : "text-warning"
-                }`}
-              />
-              <span>Smoking: {roommate.lifestylePreferences.smoking}</span>
+            <div className="flex items-center gap-2 bg-base-200 p-3 rounded-xl">
+              {roommate.lifestylePreferences.smoking === false ? (
+                <>
+                  <FaSmokingBan className="text-red-500 text-2xl" />
+                  <span>No Smoking</span>
+                </>
+              ) : (
+                <>
+                  <FaSmoking className="text-yellow-600 text-2xl" />
+                  <span> Occasionally</span>
+                </>
+              )}
             </div>
-
-            <div className="flex items-center space-x-2">
-              <MdNightlight
-                className={`text-2xl ${
-                  roommate.lifestylePreferences.nightOwl
-                    ? "text-info"
-                    : "text-neutral"
-                }`}
-              />
+            <div className="flex items-center gap-2 bg-base-200 p-3 rounded-xl">
+              <MdNightlight className="text-purple-500 text-2xl" />
               <span>
                 {roommate.lifestylePreferences.nightOwl
                   ? "Night Owl"
@@ -117,43 +135,38 @@ const Details = () => {
           </div>
         </div>
 
-        {/* Description */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-3 text-primary flex items-center gap-2">
-            <MdDescription className="text-xl" />
-            Description
-          </h2>
-          <p>{roommate.description}</p>
+        {/* Availability */}
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold mb-2">Availability</h2>
+          <p
+            className={`font-medium ${
+              roommate.availability ? "text-success" : "text-error"
+            }`}>
+            {roommate.availability ? "Available" : "Not Available"}
+          </p>
         </div>
 
         {/* Contact Info */}
-        <div>
-          <h2 className="text-2xl font-semibold mb-4 text-primary flex items-center gap-2">
-            <MdPerson className="text-xl" />
-            Contact Information
-          </h2>
+        <div className="mt-8 border-t pt-6">
+          <h2 className="text-xl font-semibold mb-3">Contact</h2>
+          <p className="flex items-center gap-2 mb-2">
+            <span className="text-primary font-medium">Name:</span>{" "}
+            {roommate.name}
+          </p>
+          <p className="flex items-center gap-2">
+            <MdPhone className="text-info text-xl" />
 
-          <div className="space-y-2 text-lg">
-            <p>
-              <strong>Name: </strong> {roommate.name}
-            </p>
-            <p className="flex items-center gap-2">
-              <MdPhone className="text-success" />
-              <a
-                href={`tel:${roommate.phone}`}
-                className="hover:text-success-focus underline">
-                {roommate.phone}
-              </a>
-            </p>
-            <p className="flex items-center gap-2">
-              <MdEmail className="text-info" />
-              <a
-                href={`mailto:${roommate.email}`}
-                className="hover:text-info-focus underline">
-                {roommate.email}
-              </a>
-            </p>
-          </div>
+            <a href={`tel:${roommate.contactInfo}`} className="link link-hover">
+              {roommate.contactInfo}
+            </a>
+          </p>
+          <p className="flex items-center gap-2">
+            <MdEmail className="text-info text-xl" />
+
+            <a href={`mailto:${roommate.email}`} className="link link-hover">
+              {roommate.email}
+            </a>
+          </p>
         </div>
       </div>
     </div>
