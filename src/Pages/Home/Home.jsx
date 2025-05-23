@@ -3,7 +3,6 @@ import Banner from "../../Components/Banner/Banner";
 import Featured from "../../Components/Featured/Featured";
 import Reviews from "../../Components/Reviews/Reviews";
 import Faq from "../../Components/FAQ/Faq";
-import { useLoaderData } from "react-router";
 
 const Home = () => {
   return (

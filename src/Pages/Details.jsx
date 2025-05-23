@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 // import { AiFillHeart, AiOutlineHeart } from "react-icons";
 import {
   MdLocationOn,
@@ -10,22 +10,26 @@ import {
 import { FaSmokingBan, FaSmoking } from "react-icons/fa";
 import { BsDoorOpen } from "react-icons/bs";
 import { AiFillHeart, AiFillLike, AiOutlineHeart } from "react-icons/ai";
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData, useLocation } from "react-router";
 import { IoReturnDownBack } from "react-icons/io5";
-import { SlLike } from "react-icons/sl";
+import toast from "react-hot-toast";
+import { AuthContext } from "../Contexts/AuthContext";
 
 const Details = () => {
   const [liked, setLiked] = useState(false);
+  const { user } = use(AuthContext);
 
-  const roommate = useLoaderData();
-  // console.log(roommate);
+  const data = useLoaderData();
+
+  const [roommate, setRoommate] = useState(data);
+
+  const { state } = useLocation();
+  const from = state?.from || "/BrowseListing";
 
   if (roommate.message === "Invalid ID format" || roommate === "") {
     return (
       <div className="w-11/12 mx-auto max-w-4xl mt-[50px] min-h-[calc(100vh-65px)]">
-        <Link
-          to={"/BrowseListing"}
-          className="flex items-center text-2xl text-primary">
+        <Link to={from} className="flex items-center text-2xl text-primary">
           <IoReturnDownBack className="self-end" />
           Back
         </Link>
@@ -34,6 +38,31 @@ const Details = () => {
     );
   }
 
+  const handleLike = () => {
+    // console.log(roommate);
+
+    if (user.email === roommate.email) {
+      toast.error("You can't like your listings");
+      return;
+    }
+
+    setLiked(true);
+    fetch(`http://localhost:3000/flatify/like/${roommate._id}`, {
+      method: "put",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.matchedCount) {
+          setRoommate((prev) => ({
+            ...prev,
+            liked: prev.liked + 1,
+          }));
+
+          toast.success("like increased");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   // const roommate = {
   //   id: 1,
   //   title: "Looking for a roommate in Dhanmondi",
@@ -55,14 +84,12 @@ const Details = () => {
 
   return (
     <div className="w-11/12 mx-auto max-w-4xl mt-[50px]">
-      <Link
-        to={"/BrowseListing"}
-        className="flex items-center text-2xl text-primary">
+      <Link to={from} className="flex items-center text-2xl text-primary">
         <IoReturnDownBack className="self-end" />
         Back
       </Link>
       <h1 className="text-[20px] font-bold text-secondary">
-        10 people Intrested
+        {roommate.liked} people Intrested
       </h1>
       <div className="max-w-4xl mx-auto p-6 bg-base-100 shadow-sm shadow-primary rounded-2xl my-10 ">
         {/* Header */}
@@ -74,7 +101,9 @@ const Details = () => {
             </h1>
           </div>
           <button
-            onClick={() => setLiked(true)}
+            onClick={() => {
+              handleLike();
+            }}
             className="text-3xl transition duration-300 hover:scale-110 self-start md:self-end mt-[10px] cursor-pointer active:scale-90 text-blue-600"
             aria-label="Like">
             <AiFillLike size={40} />

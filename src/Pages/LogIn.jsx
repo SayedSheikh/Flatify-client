@@ -1,17 +1,27 @@
 import React, { use, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
+import toast from "daisyui/components/toast";
 
 const LogIn = () => {
   const [error, setError] = useState("");
   const { SignIn, googleSignIn } = use(AuthContext);
   const navigate = useNavigate("/");
 
+  const { state } = useLocation();
+  console.log(location);
+
   const handleGoogleSignIn = () => {
     setError("");
     googleSignIn()
-      .then(() => navigate("/"))
-      .catch((err) => setError(err.code));
+      .then(() => {
+        navigate(state || "/");
+        toast.success("Logged In Successfully !!");
+      })
+      .catch((err) => {
+        toast.error(error);
+        setError(err.code);
+      });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,10 +33,13 @@ const LogIn = () => {
     console.log(email, password);
 
     SignIn(email, password)
-      .then((res) => console.log(res))
+      .then(() => {
+        navigate(state || "/");
+        toast.success("Logged In Successfully !!");
+      })
       .catch((err) => {
         setError(err.code.slice(5).split("-").join(" "));
-        console.log(err.code.slice(5).split("-").join(" "));
+        toast.error(error);
       });
   };
   return (

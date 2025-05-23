@@ -20,10 +20,12 @@ const AddToFindListing = () => {
     description: "",
     contactInfo: "",
     availability: true,
+    liked: 0,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,

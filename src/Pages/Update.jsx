@@ -27,9 +27,10 @@ const Update = () => {
       smoking: info?.lifestylePreferences?.smoking ?? false,
       nightOwl: info?.lifestylePreferences?.nightOwl ?? false,
     },
-    description: info?.description,
-    contactInfo: info?.contactInfo,
-    availability: info?.availability,
+    description: info?.description || "",
+    contactInfo: info?.contactInfo || "",
+    availability: info?.availability || "",
+    liked: info?.liked || 0,
   });
 
   const handleChange = (e) => {

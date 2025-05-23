@@ -101,7 +101,7 @@ const MyListingPage = () => {
                   <td>{index + 1}</td>
                   <td>{listing.title}</td>
                   <td>{listing.location}</td>
-                  <td>{listing.rentAmount}</td>
+                  <td>{listing.rentAmount} BDT/month</td>
                   <td>{listing.roomType}</td>
                   <td className="flex gap-2">
                     <button

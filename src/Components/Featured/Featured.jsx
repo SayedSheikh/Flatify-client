@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { FaLocationDot } from "react-icons/fa6";
 import { MdOutlineAttachMoney } from "react-icons/md";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
+import Skeleton from "../Loading/Skeleton";
 
 // Sample JSON data (normally this would come from props or an API)
 // const allPosts = [
@@ -78,8 +79,10 @@ import { Link } from "react-router";
 const Featured = () => {
   const [allPosts, setAllPosts] = useState([]);
 
+  const { pathname } = useLocation();
+
   useEffect(() => {
-    fetch("/data.json")
+    fetch("http://localhost:3000/featured")
       .then((res) => res.json())
       .then((data) => setAllPosts(data));
   }, [setAllPosts]);
@@ -112,11 +115,17 @@ const Featured = () => {
       <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-secondary">
         Featured Roommate Posts
       </h2>
-      {allPosts.length === 0 && <p>Loading...</p>}
+      {allPosts.length === 0 && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 3 }).map((_, idx) => {
+            <Skeleton key={idx}></Skeleton>;
+          })}
+        </div>
+      )}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {availablePosts.map((post) => (
           <div
-            key={post.id}
+            key={post?._id}
             className="card bg-base-100 shadow-xl border border-gray-200">
             <div className="card-body space-y-2">
               <h3 className="card-title text-lg font-semibold">{post.title}</h3>
@@ -137,7 +146,8 @@ const Featured = () => {
               </div>
               <div className="card-actions mt-4">
                 <Link
-                  to={`/details/${post.id}`}
+                  state={{ from: pathname }}
+                  to={`/details/${post._id}`}
                   className="btn btn-primary w-full">
                   See More
                 </Link>

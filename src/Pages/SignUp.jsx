@@ -1,6 +1,7 @@
 import React, { use, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -21,12 +22,15 @@ const SignUp = () => {
     setSuccess(false);
     if (!/[A-Z]/.test(password)) {
       setError("Atleast one Upprcase letter needed!!");
+      toast.error("Atleast one Upprcase letter needed!!");
       return;
     } else if (!/[a-z]/.test(password)) {
       setError("Atleast one Lowercase letter needed!!");
+      toast.error("Atleast one Lowercase letter needed!!");
       return;
     } else if (!/\d/.test(password)) {
       setError("Atleast one Digit needed!!");
+      toast.error("Atleast one Digit needed!!");
       return;
     }
 
@@ -35,21 +39,29 @@ const SignUp = () => {
         editProfile({ displayName: name, photoURL: photoUrl })
           .then(() => {
             navigate("/");
+            toast.success("Registration Succeccful !!");
           })
           .catch((err) => {
-            console.log(err);
+            toast.error(err.code);
           });
       })
       .catch((err) => {
         setError(err.code.slice(5).split("-").join(" "));
+        toast.error("Error Occured");
       });
   };
 
   const handleGoogleSignIn = () => {
     setError("");
     googleSignIn()
-      .then(() => navigate("/"))
-      .catch((err) => setError(err.code));
+      .then(() => {
+        navigate("/");
+        toast.success("SignIn Successful");
+      })
+      .catch((err) => {
+        setError(err.code);
+        toast.error("Error occured !!");
+      });
   };
   return (
     <div className="min-h-screen w-11/12 mx-auto">

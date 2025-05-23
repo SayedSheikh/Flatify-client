@@ -8,7 +8,7 @@ const BrowseListing = () => {
 
   const navigate = useNavigate();
 
-  const [listings, setListings] = useState(data);
+  const [listings] = useState(data);
 
   // useEffect(() => {
   //   // Simulate fetch + filter by logged-in user
@@ -46,7 +46,7 @@ const BrowseListing = () => {
                 <tr key={listing._id}>
                   <td>{index + 1}</td>
                   <td>{listing.location}</td>
-                  <td>{listing.rentAmount}</td>
+                  <td>{listing.rentAmount} BDT/month</td>
                   <td
                     className={`${
                       listing.availability ? "text-green-400" : "text-red-400"

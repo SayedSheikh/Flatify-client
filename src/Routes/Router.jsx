@@ -9,6 +9,7 @@ import BrowseListing from "../Pages/BrowseListing";
 import Details from "../Pages/Details";
 import Update from "../Pages/Update";
 import Error from "../Pages/Error";
+import PrivateRoute from "../Pages/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/AddListing",
-        Component: AddToFindListing,
+        element: (
+          <PrivateRoute>
+            <AddToFindListing></AddToFindListing>{" "}
+          </PrivateRoute>
+        ),
       },
       {
         path: "/BrowseListing",
@@ -32,9 +37,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/MyListings",
-        Component: MyListingPage,
-        // loader: () => fetch("/data.json"),
-        // hydrateFallbackElement: <p>Loading...</p>,
+
+        element: (
+          <PrivateRoute>
+            {" "}
+            <MyListingPage></MyListingPage>{" "}
+          </PrivateRoute>
+        ),
       },
       {
         path: "/MyListings/update/:id",
@@ -46,7 +55,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        Component: Details,
+        element: (
+          <PrivateRoute>
+            <Details></Details>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:3000/flatify/${params.id}`),
 
