@@ -1,12 +1,40 @@
-# React + Vite
+# Flatify Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🌟 **Flatify** is a modern web application for browsing, posting, and managing roommate or flat listings.
 
-Currently, two official plugins are available:
+This is the **frontend** codebase, built using **React** + **Tailwind CSS** + **Firebase**.  
+The live app is deployed at:  
+👉 [https://flatify-6a56c.web.app](https://flatify-6a56c.web.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Live Website
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+✅ Visit here → [https://flatify-6a56c.web.app](https://flatify-6a56c.web.app)
+
+---
+
+## ✨ Features
+
+✅ User authentication (Firebase)  
+✅ Browse flat/roommate listings  
+✅ Post your own listings  
+✅ Like & review listings  
+✅ Swiper carousels for banners and featured  
+✅ Smooth animations (React Awesome Reveal)  
+✅ Toast notifications (React Hot Toast)  
+✅ Responsive & mobile-friendly (Tailwind + DaisyUI)
+
+---
+
+## ⚙️ Tech Stack
+
+| Layer        | Technology                           |
+| ------------ | ------------------------------------ |
+| **Frontend** | React, React Router, React Icons     |
+| **Styling**  | Tailwind CSS, DaisyUI, Swiper        |
+| **Auth**     | Firebase Authentication              |
+| **API**      | Custom Express.js + MongoDB backend  |
+| **UX**       | SweetAlert2, React Hot Toast, Swiper |
+
+---
