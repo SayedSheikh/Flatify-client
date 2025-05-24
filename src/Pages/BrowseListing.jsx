@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Fade } from "react-awesome-reveal";
-import { FaLocationDot } from "react-icons/fa6";
-import { MdOutlineAttachMoney } from "react-icons/md";
-import { Link, useLoaderData, useNavigate } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 
 const BrowseListing = () => {
   const data = useLoaderData();

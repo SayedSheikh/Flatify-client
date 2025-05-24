@@ -29,13 +29,6 @@ const MyListingPage = () => {
   }, [user?.email]);
 
   const handleDelete = (id) => {
-    // if (confirm("Are you sure you want to delete this listing?")) {
-    //   const updated = [...listings];
-    //   updated.splice(index, 1);
-    //   setListings(updated);
-    // }
-    console.log(id);
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",

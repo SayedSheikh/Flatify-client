@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar/Navbar";
 import { Outlet } from "react-router";
 import Footer from "../Components/Footer/Footer";
+import ScrollToTop from "../Components/ScrollToTop/ScrollToTop";
 
 const MainLayout = () => {
   const [theme, setTheme] = useState(null); // Set initial as null
@@ -24,6 +25,7 @@ const MainLayout = () => {
 
   return (
     <div>
+      <ScrollToTop></ScrollToTop>
       <Navbar theme={theme} setTheme={setTheme}></Navbar>
       <main className="min-h-[calc(100vh-65px)]">
         <Outlet></Outlet>

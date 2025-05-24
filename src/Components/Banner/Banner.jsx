@@ -3,10 +3,8 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { Link } from "react-router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Mousewheel, Pagination } from "swiper/modules";
-
-import feat1 from "/featured1.jpeg";
-import feat2 from "/featured2.jpeg";
-import feat3 from "/featured3.jpeg";
+import { Typewriter } from "react-simple-typewriter";
+import "./Banner.css";
 
 // Import Swiper styles
 import "swiper/css";
@@ -52,13 +50,13 @@ const Banner = () => {
         pagination={{
           clickable: true,
         }}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 3000,
+        //   disableOnInteraction: false,
+        // }}
         cssMode={true}
         mousewheel={true}
-        modules={[Pagination, Mousewheel, Autoplay]}
+        modules={[Pagination, Mousewheel]}
         className="mySwiper h-full">
         {slides.map((item) => (
           <SwiperSlide key={item._id}>
@@ -72,10 +70,23 @@ const Banner = () => {
               <div className="relative text-white self-center space-y-[10px] w-fit">
                 <h1 className="font-semibold md:text-3xl text-2xl lg:text-5xl">
                   <span className="text-pink-500">
-                    {item.title.split(" ")[0]}
+                    {item.title.a.split(" ")[0]}
                     <br />
                   </span>
-                  <span>{item.title.split(" ").slice(1).join(" ")}</span>
+                  {/* <span>{item.title.c.split(" ").slice(1).join(" ")}</span> */}
+                  <div className="min-h-10 text-[#3abff8] text-shadow-2xs text-shadow-black">
+                    <Typewriter
+                      words={[
+                        item?.title?.a?.split(" ").slice(1).join(" "),
+                        item?.title?.b?.split(" ").slice(1).join(" ") ?? " ",
+                        item?.title?.c?.split(" ").slice(1).join(" "),
+                      ]}
+                      loop={Infinity}
+                      cursor
+                      cursorStyle="|"
+                    />
+                  </div>
+
                   {/* {itme.title} */}
                 </h1>
                 <p className="semi-bold text-balance text-base md:text-lg lg:text-xl mb-[10px] mt-[20px]">
