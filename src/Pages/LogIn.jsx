@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
 import toast from "react-hot-toast";
@@ -9,6 +9,10 @@ const LogIn = () => {
   const navigate = useNavigate("/");
 
   const { state } = useLocation();
+
+  useEffect(() => {
+    toast.success("LogIn First !!");
+  }, [state]);
   // console.log(location);
 
   const handleGoogleSignIn = () => {
