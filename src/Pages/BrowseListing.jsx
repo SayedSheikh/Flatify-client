@@ -19,7 +19,7 @@ const BrowseListing = () => {
       <title>FlaTify | Browse Listing</title>
       <Fade duration={1500} triggerOnce>
         <h2 className="text-2xl font-bold mb-4 text-center text-secondary">
-          My Roommate Listings
+          Roommate Listings
         </h2>
         <Fade delay={500} cascade damping={0.3} triggerOnce>
           {listings.length === 0 ? (
