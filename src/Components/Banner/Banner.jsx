@@ -14,31 +14,10 @@ import "./banner.css";
 import toast from "react-hot-toast";
 
 const Banner = () => {
-  // const slides = [
-  //   {
-  //     title: "Find the Perfect Roommate, Fast!",
-  //     description:
-  //       "Post your listing or browse hundreds of verified roommate profiles near you.",
-  //     img: "https://cdn.diggz.co/assets/city-banner-desktop-dark30-9ea3a158466fa13feb8147c6ae647ed63d9032a9411e69c49389662808dd25a0.webp",
-  //   },
-  //   {
-  //     title: "Verified Listings You Can Trust",
-  //     description:
-  //       "No more fake ads. All rooms and profiles are screened for your safety.",
-  //     img: "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=1740&q=80",
-  //   },
-  //   {
-  //     title: "Match by Lifestyle and Budget",
-  //     description:
-  //       "Use filters to match with roommates who share your habits, hobbies, and price range.",
-  //     img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1740&q=80",
-  //   },
-  // ];
-
   const [slides, setSlides] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/banner")
+    fetch("https://flatify-server.vercel.app/banner")
       .then((res) => res.json())
       .then((data) => setSlides(data))
       .catch(() => toast.error("error occured !!!"));

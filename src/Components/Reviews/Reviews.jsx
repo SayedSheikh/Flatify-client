@@ -10,21 +10,16 @@ const Reviews = () => {
   const [area, setArea] = useState("");
   const [rating, setRating] = useState(1); // default rating
   const [userReview, setUserReview] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) {
-      return;
-    }
-    fetch("http://localhost:3000/reviews")
+    fetch("https://flatify-server.vercel.app/reviews")
       .then((res) => res.json())
       .then((data) => {
         setUserReview(data);
-        setLoading(false);
       })
       .catch(() => {
         toast.error("error occurs");
-        setLoading(false);
       });
   }, [user]);
 
@@ -40,7 +35,7 @@ const Reviews = () => {
         location: area,
         name: user?.displayName || "",
       };
-      fetch("http://localhost:3000/reviews", {
+      fetch("https://flatify-server.vercel.app/reviews", {
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -57,7 +52,7 @@ const Reviews = () => {
             toast.success("Review added Successfully !!");
           }
         })
-        .catch((err) => console.log(err));
+        .catch(() => toast.error("error occured"));
       setReview("");
       setRating(1);
       setArea("");
@@ -77,13 +72,6 @@ const Reviews = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-[calc(100vh-65px)] flex items-center justify-center">
-        <span className="loading loading-bars w-[50px] text-primary"></span>
-      </div>
-    );
-  }
   return (
     <section className="my-16 max-w-[1300px] mx-auto px-4">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-2">

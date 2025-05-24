@@ -9,7 +9,7 @@ const LogIn = () => {
   const navigate = useNavigate("/");
 
   const { state } = useLocation();
-  console.log(location);
+  // console.log(location);
 
   const handleGoogleSignIn = () => {
     setError("");
@@ -29,7 +29,7 @@ const LogIn = () => {
     const form = e.target;
     const formData = new FormData(form);
     const { email, password } = Object.fromEntries(formData.entries());
-    console.log(email, password);
+    // console.log(email, password);
 
     SignIn(email, password)
       .then(() => {
@@ -43,6 +43,7 @@ const LogIn = () => {
   };
   return (
     <div className="min-h-screen w-11/12 mx-auto">
+      <title>FlaTify | Login</title>
       <div className="card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow-lg border border-gray-300 my-[100px]">
         <div className="card-body">
           <h1 className="text-5xl font-bold text-primary">Login now!</h1>

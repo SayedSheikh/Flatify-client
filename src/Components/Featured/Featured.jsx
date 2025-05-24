@@ -4,6 +4,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { Link, useLocation } from "react-router";
 import Skeleton from "../Loading/Skeleton";
+import toast from "react-hot-toast";
 
 // Sample JSON data (normally this would come from props or an API)
 // const allPosts = [
@@ -82,9 +83,10 @@ const Featured = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    fetch("http://localhost:3000/featured")
+    fetch("https://flatify-server.vercel.app/featured")
       .then((res) => res.json())
-      .then((data) => setAllPosts(data));
+      .then((data) => setAllPosts(data))
+      .catch(() => toast.error("error occured"));
   }, [setAllPosts]);
 
   // const availablePosts = allPosts

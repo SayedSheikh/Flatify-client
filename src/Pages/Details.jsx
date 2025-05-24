@@ -47,7 +47,7 @@ const Details = () => {
     }
 
     setLiked(true);
-    fetch(`http://localhost:3000/flatify/like/${roommate._id}`, {
+    fetch(`https://flatify-server.vercel.app/flatify/like/${roommate._id}`, {
       method: "put",
     })
       .then((res) => res.json())
@@ -61,7 +61,7 @@ const Details = () => {
           toast.success("like increased");
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => toast.error("error occured"));
   };
   // const roommate = {
   //   id: 1,
@@ -84,6 +84,7 @@ const Details = () => {
 
   return (
     <div className="w-11/12 mx-auto max-w-4xl mt-[50px]">
+      <title>FlaTify | Browse Details</title>
       <Link to={from} className="flex items-center text-2xl text-primary">
         <IoReturnDownBack className="self-end" />
         Back

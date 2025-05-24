@@ -3,6 +3,7 @@ import { AuthContext } from "../Contexts/AuthContext";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { Fade } from "react-awesome-reveal";
+import toast from "react-hot-toast";
 
 const MyListingPage = () => {
   const { user } = use(AuthContext);
@@ -16,15 +17,15 @@ const MyListingPage = () => {
       return;
     }
     // setLoading(true);
-    fetch(`http://localhost:3000/flatify/mylisting/${user?.email}`)
+    fetch(`https://flatify-server.vercel.app/flatify/mylisting/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setListings(data);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
-        console.log(err);
+        toast.error("Error occured");
       });
   }, [user?.email]);
 
@@ -39,7 +40,7 @@ const MyListingPage = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/flatify/${id}`, {
+        fetch(`https://flatify-server.vercel.app/flatify/${id}`, {
           method: "delete",
         })
           .then((res) => res.json())
@@ -53,7 +54,7 @@ const MyListingPage = () => {
               });
             }
           })
-          .catch((err) => console.log(err));
+          .catch(() => toast.error("Error occured"));
       }
     });
   };
@@ -66,11 +67,13 @@ const MyListingPage = () => {
   if (!user || loading)
     return (
       <div className="min-h-[calc(100vh-65px)] flex items-center justify-center">
+        <title>FlaTify | My Listing</title>
         <span className="loading loading-bars w-[50px] text-primary"></span>
       </div>
     );
   return (
     <div className="overflow-x-auto max-w-6xl mx-auto px-4 py-8 min-h-[calc(100vh-65px)]">
+      <title>FlaTify | My Listing</title>
       <Fade duration={1500} triggerOnce>
         <h2 className="text-2xl font-bold mb-4 text-center text-secondary">
           My Roommate Listings

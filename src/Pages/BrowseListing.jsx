@@ -16,6 +16,7 @@ const BrowseListing = () => {
 
   return (
     <div className="overflow-x-auto max-w-6xl mx-auto px-4 py-8 min-h-[calc(100vh-65px)]">
+      <title>FlaTify | Browse Listing</title>
       <Fade duration={1500} triggerOnce>
         <h2 className="text-2xl font-bold mb-4 text-center text-secondary">
           My Roommate Listings

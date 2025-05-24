@@ -57,7 +57,7 @@ const Update = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/flatify/${info._id}`, {
+    fetch(`https://flatify-server.vercel.app/flatify/${info._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -74,11 +74,10 @@ const Update = () => {
             timer: 1500,
           });
         } else {
-          console.log("no modification");
           toast.error("no modification");
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => toast.error("Error occured"));
   };
   if (!user)
     return (
@@ -88,6 +87,7 @@ const Update = () => {
     );
   return (
     <div className="max-w-4xl mx-auto w-11/12 my-[40px]">
+      <title>FlaTify | Update</title>
       <Link
         to={"/MyListings"}
         className="flex items-center text-2xl text-primary">

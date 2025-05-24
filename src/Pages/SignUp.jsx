@@ -65,6 +65,7 @@ const SignUp = () => {
   };
   return (
     <div className="min-h-screen w-11/12 mx-auto">
+      <title>FlaTify | Sign Up</title>
       <div className="card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow-lg border border-gray-300 my-[100px]">
         <div className="card-body">
           <h1 className="text-5xl font-bold text-primary">SignUp now!</h1>

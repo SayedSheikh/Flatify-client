@@ -10,6 +10,7 @@ import Details from "../Pages/Details";
 import Update from "../Pages/Update";
 import Error from "../Pages/Error";
 import PrivateRoute from "../Pages/PrivateRoute";
+import Loading from "../Components/Loading/Loading";
 
 const router = createBrowserRouter([
   {
@@ -32,8 +33,8 @@ const router = createBrowserRouter([
       {
         path: "/BrowseListing",
         Component: BrowseListing,
-        loader: () => fetch("http://localhost:3000/flatify"),
-        hydrateFallbackElement: <p>Loading...</p>,
+        loader: () => fetch("https://flatify-server.vercel.app/flatify"),
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "/MyListings",
@@ -47,11 +48,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/MyListings/update/:id",
-        Component: Update,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/flatify/${params.id}`),
+          fetch(`https://flatify-server.vercel.app/flatify/${params.id}`),
 
-        hydrateFallbackElement: <p>Loading...</p>,
+        hydrateFallbackElement: <Loading></Loading>,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <Update></Update>{" "}
+          </PrivateRoute>
+        ),
       },
       {
         path: "/details/:id",
@@ -61,9 +67,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/flatify/${params.id}`),
+          fetch(`https://flatify-server.vercel.app/flatify/${params.id}`),
 
-        hydrateFallbackElement: <p>Loading...</p>,
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "/login",

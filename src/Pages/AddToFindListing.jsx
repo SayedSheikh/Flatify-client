@@ -3,6 +3,7 @@ import { AuthContext } from "../Contexts/AuthContext";
 import { Link } from "react-router";
 import { IoReturnDownBack } from "react-icons/io5";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const AddToFindListing = () => {
   const { user } = use(AuthContext);
@@ -48,7 +49,7 @@ const AddToFindListing = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/flatify", {
+    fetch("https://flatify-server.vercel.app/flatify", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -80,7 +81,7 @@ const AddToFindListing = () => {
           });
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => toast.error("error occured"));
 
     // TODO: Send `formData` to the backend API
   };
@@ -92,6 +93,7 @@ const AddToFindListing = () => {
     );
   return (
     <div className="max-w-4xl mx-auto w-11/12 my-[60px] mb-[100px]">
+      <title>FlaTify | Add Listing</title>
       <Link to={"/"} className="flex items-center text-2xl text-primary">
         <IoReturnDownBack className="self-end" />
         Back
