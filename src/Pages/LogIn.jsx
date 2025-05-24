@@ -11,7 +11,9 @@ const LogIn = () => {
   const { state } = useLocation();
 
   useEffect(() => {
-    toast.success("LogIn First !!");
+    if (state) {
+      toast.success("LogIn First !!");
+    }
   }, [state]);
   // console.log(location);
 
