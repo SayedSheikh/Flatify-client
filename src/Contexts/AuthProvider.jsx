@@ -27,11 +27,11 @@ const AuthProvider = ({ children }) => {
   };
 
   const editProfile = (updatedInfo) => {
-    setLoading(true);
     return updateProfile(auth.currentUser, updatedInfo);
   };
 
   const googleSignIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 

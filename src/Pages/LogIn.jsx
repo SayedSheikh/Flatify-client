@@ -1,7 +1,7 @@
 import React, { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
-import toast from "daisyui/components/toast";
+import toast from "react-hot-toast";
 
 const LogIn = () => {
   const [error, setError] = useState("");
@@ -19,7 +19,6 @@ const LogIn = () => {
         toast.success("Logged In Successfully !!");
       })
       .catch((err) => {
-        toast.error(error);
         setError(err.code);
       });
   };

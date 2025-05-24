@@ -4,14 +4,19 @@ import "./Navbar.css";
 import lightLogo from "/logoBGWhite.png";
 import nightLogo from "/nightLogo.png";
 import { AuthContext } from "../../Contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const Navbar = ({ theme, setTheme }) => {
   const { user, logOut } = use(AuthContext);
 
   const handleSignOut = () => {
     logOut()
-      .then(() => console.log("Signout"))
-      .catch((err) => console.log(err));
+      .then(() => {
+        toast.success("Logged out !!!");
+      })
+      .catch(() => {
+        toast.error("error occured !!!");
+      });
   };
 
   const profile = (
@@ -101,7 +106,7 @@ const Navbar = ({ theme, setTheme }) => {
     </>
   );
   return (
-    <div className="bg-base-100 shadow-sm ">
+    <div className="sticky top-0 z-10 backdrop-blur-md shadow-sm shadow-primary">
       <div className="navbar  max-w-[1300px] mx-auto w-11/12 p-0">
         <div className="navbar-start">
           <div className="dropdown ">

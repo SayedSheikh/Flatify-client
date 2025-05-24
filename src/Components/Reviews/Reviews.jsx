@@ -1,76 +1,67 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
 import { AuthContext } from "../../Contexts/AuthContext";
 
-const reviews = [
-  {
-    id: 1,
-    name: "Rafi Ahmed",
-    location: "Dhanmondi, Dhaka",
-    rating: 5,
-    comment:
-      "Very useful website! Found my roommate within 2 days. Highly recommend it.",
-  },
-  {
-    id: 2,
-    name: "Fatima Yasmin",
-    location: "Chattogram",
-    rating: 4,
-    comment: "Nice experience. The interface is clean and easy to use.",
-  },
-  {
-    id: 3,
-    name: "Sabbir Khan",
-    location: "Bashundhara R/A, Dhaka",
-    rating: 4,
-    comment:
-      "Good platform for students. Could improve filtering options though.",
-  },
-  {
-    id: 4,
-    name: "Nusrat Jahan",
-    location: "Uttara, Dhaka",
-    rating: 5,
-    comment:
-      "Super helpful! Found a safe and affordable place through this site.",
-  },
-  {
-    id: 5,
-    name: "Tanvir Hossain",
-    location: "Sylhet",
-    rating: 3,
-    comment: "Decent site. Needs more listings in my area.",
-  },
-];
-
 const Reviews = () => {
   const { user } = use(AuthContext);
-  console.log(user);
+  // console.log(user);
   const [review, setReview] = useState("");
   const [area, setArea] = useState("");
   const [rating, setRating] = useState(1); // default rating
   const [userReview, setUserReview] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    fetch("http://localhost:3000/reviews")
+      .then((res) => res.json())
+      .then((data) => {
+        setUserReview(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        toast.error("error occurs");
+        setLoading(false);
+      });
+  }, [user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!user) {
-      toast.error("logIn first to add review");
-    }
+
     if (review.trim() !== "") {
       document.getElementById("my_modal_5").close();
       // console.log(review, rating);
       const obj = {
         rating,
-        review,
-        area,
+        comment: review,
+        location: area,
         name: user?.displayName || "",
       };
-      setUserReview(obj);
+      fetch("http://localhost:3000/reviews", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(obj),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            setUserReview((prev) => [
+              ...prev,
+              { ...obj, _id: data.insertedId },
+            ]);
+            toast.success("Review added Successfully !!");
+          }
+        })
+        .catch((err) => console.log(err));
       setReview("");
       setRating(1);
       setArea("");
-      toast.success("Review Added Successfully !!");
+
       // console.log(userReview);
     } else {
       // alert("please write your comment");
@@ -82,9 +73,17 @@ const Reviews = () => {
       document.getElementById("my_modal_5").showModal();
     } else {
       // alert("Install the app first");
-      toast.error("Install the app first");
+      toast.error("Login first to add review !!");
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-[calc(100vh-65px)] flex items-center justify-center">
+        <span className="loading loading-bars w-[50px] text-primary"></span>
+      </div>
+    );
+  }
   return (
     <section className="my-16 max-w-[1300px] mx-auto px-4">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-2">
@@ -99,9 +98,9 @@ const Reviews = () => {
       </div>
 
       <div className="flex flex-wrap gap-2 ">
-        {reviews.map((review) => (
+        {userReview.map((review) => (
           <div
-            key={review.id}
+            key={review._id}
             className="bg-base-100 p-5 rounded-lg shadow border border-gray-200 grow-1 ">
             <h3 className="font-semibold text-lg ">{review.name}</h3>
             <p className="text-sm text-gray-500">{review.location}</p>
@@ -113,7 +112,7 @@ const Reviews = () => {
                 <FaStar key={idx} className="text-gray-300 mr-1" />
               ))}
             </div>
-            <p className="text-sm text-gray-700 max-w-[450px]">
+            <p className="text-sm text-base-400 max-w-[450px]">
               {review.comment}
             </p>
           </div>

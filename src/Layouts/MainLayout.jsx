@@ -25,7 +25,9 @@ const MainLayout = () => {
   return (
     <div>
       <Navbar theme={theme} setTheme={setTheme}></Navbar>
-      <Outlet></Outlet>
+      <main className="min-h-[calc(100vh-65px)]">
+        <Outlet></Outlet>
+      </main>
       <Footer></Footer>
     </div>
   );
