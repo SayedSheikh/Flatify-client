@@ -82,7 +82,7 @@ const MyListingPage = () => {
           {listings.length === 0 ? (
             <p className="text-center text-gray-500">No listings found.</p>
           ) : (
-            <div className="overflow-hidden rounded-[8px] shadow">
+            <div className="overflow-x-auto rounded-[8px] shadow">
               <table className="table table-zebra w-full  bg-base-200">
                 <thead>
                   <tr className="bg-base-300 text-base font-semibold">

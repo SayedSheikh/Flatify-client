@@ -25,7 +25,7 @@ const BrowseListing = () => {
           {listings.length === 0 ? (
             <p className="text-center text-gray-500">No listings found.</p>
           ) : (
-            <div className="rounded-[8px] overflow-hidden shadow">
+            <div className="rounded-[8px] overflow-x-auto shadow">
               <table className="table table-zebra w-full bg-base-200 ">
                 <thead className="rounded-2xl">
                   <tr className="bg-base-300 text-base font-semibold ">
