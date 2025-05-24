@@ -12,6 +12,7 @@ import "swiper/css/pagination";
 
 import "./banner.css";
 import toast from "react-hot-toast";
+import Loading from "../Loading/Loading";
 
 const Banner = () => {
   const [slides, setSlides] = useState([]);
@@ -24,6 +25,7 @@ const Banner = () => {
   }, []);
   return (
     <div className="h-[500px] rounded-[8px]  z-[4]">
+      {slides.length === 0 && <Loading></Loading>}
       <Swiper
         spaceBetween={30}
         pagination={{
