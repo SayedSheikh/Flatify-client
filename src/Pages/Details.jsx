@@ -50,7 +50,7 @@ const Details = () => {
     }
 
     setLiked(true);
-    fetch(`http://localhost:3000/flatify/like/${roommate._id}`, {
+    fetch(`https://flatify-server.vercel.app/flatify/like/${roommate._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())

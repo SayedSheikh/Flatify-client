@@ -56,7 +56,7 @@ const AddToFindListing = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/flatify", {
+    fetch("https://flatify-server.vercel.app/flatify", {
       method: "post",
       headers: {
         "content-type": "application/json",

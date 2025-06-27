@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: "/BrowseListing",
         Component: BrowseListing,
-        loader: () => fetch("http://localhost:3000/flatify"),
+        loader: () => fetch("https://flatify-server.vercel.app/flatify"),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
@@ -57,7 +57,7 @@ const router = createBrowserRouter([
       {
         path: "/MyListings/update/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/flatify/${params.id}`),
+          fetch(`https://flatify-server.vercel.app/flatify/${params.id}`),
 
         hydrateFallbackElement: <Loading></Loading>,
         element: (
@@ -75,7 +75,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/flatify/${params.id}`),
+          fetch(`https://flatify-server.vercel.app/flatify/${params.id}`),
 
         hydrateFallbackElement: <Loading></Loading>,
       },
@@ -125,7 +125,7 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/mylistingUpdate/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/flatify/${params.id}`),
+          fetch(`https://flatify-server.vercel.app/flatify/${params.id}`),
 
         hydrateFallbackElement: <Loading></Loading>,
         Component: MyListingUpdate,
@@ -141,7 +141,7 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/BrowseListing",
         Component: BrowseListing,
-        loader: () => fetch("http://localhost:3000/flatify"),
+        loader: () => fetch("https://flatify-server.vercel.app/flatify"),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
@@ -152,7 +152,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/flatify/${params.id}`),
+          fetch(`https://flatify-server.vercel.app/flatify/${params.id}`),
 
         hydrateFallbackElement: <Loading></Loading>,
       },

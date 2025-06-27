@@ -20,7 +20,7 @@ const MyListings = () => {
     queryKey: ["myListings", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:3000/flatify/mylisting/${user?.email}`
+        `https://flatify-server.vercel.app/flatify/mylisting/${user?.email}`
       );
       const data = await res.json();
       return data;
@@ -39,7 +39,7 @@ const MyListings = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/flatify/${id}`, {
+        fetch(`https://flatify-server.vercel.app/flatify/${id}`, {
           method: "delete",
         })
           .then((res) => res.json())

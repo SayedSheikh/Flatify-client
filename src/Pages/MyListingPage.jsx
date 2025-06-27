@@ -17,7 +17,7 @@ const MyListingPage = () => {
       return;
     }
     // setLoading(true);
-    fetch(`http://localhost:3000/flatify/mylisting/${user?.email}`)
+    fetch(`https://flatify-server.vercel.app/flatify/mylisting/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setListings(data);
@@ -40,7 +40,7 @@ const MyListingPage = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/flatify/${id}`, {
+        fetch(`https://flatify-server.vercel.app/flatify/${id}`, {
           method: "delete",
         })
           .then((res) => res.json())

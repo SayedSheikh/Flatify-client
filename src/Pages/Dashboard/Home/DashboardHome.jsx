@@ -21,7 +21,7 @@ const DashboardHome = () => {
     queryKey: ["listings", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:3000/flatify/mylisting/${user?.email}`
+        `https://flatify-server.vercel.app/flatify/mylisting/${user?.email}`
       );
       return res.json();
     },

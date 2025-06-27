@@ -42,7 +42,7 @@ const DashboardLayout = () => {
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col  ">
-          <div className="fixed top-0 shadow shadow-primary navbar bg-base-300 w-full lg:hidden">
+          <div className="sticky z-100 top-0 shadow shadow-primary navbar bg-base-300 w-full lg:hidden">
             <div className="flex-none ">
               <label
                 htmlFor="my-drawer-2"

@@ -57,7 +57,7 @@ const Update = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/flatify/${info._id}`, {
+    fetch(`https://flatify-server.vercel.app/flatify/${info._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
