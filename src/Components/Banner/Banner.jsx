@@ -18,7 +18,7 @@ const Banner = () => {
   const [slides, setSlides] = useState([]);
 
   useEffect(() => {
-    fetch("https://flatify-server.vercel.app/banner")
+    fetch("http://localhost:3000/banner")
       .then((res) => res.json())
       .then((data) => setSlides(data))
       .catch(() => toast.error("error occured !!!"));

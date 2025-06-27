@@ -83,7 +83,7 @@ const Featured = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    fetch("https://flatify-server.vercel.app/featured")
+    fetch("http://localhost:3000/featured")
       .then((res) => res.json())
       .then((data) => setAllPosts(data))
       .catch(() => toast.error("error occured"));

@@ -23,8 +23,11 @@ const Details = () => {
 
   const [roommate, setRoommate] = useState(data);
 
-  const { state } = useLocation();
-  const from = state?.from || "/BrowseListing";
+  const location = useLocation();
+  let from = location?.state?.from || "/BrowseListing";
+  if (location.pathname.split("/")[1] === "dashboard") {
+    from = "/dashboard/BrowseListing";
+  }
 
   if (roommate.message === "Invalid ID format" || roommate === "") {
     return (
@@ -41,14 +44,14 @@ const Details = () => {
   const handleLike = () => {
     // console.log(roommate);
 
-    if (user.email === roommate.email) {
+    if (user?.email === roommate?.email) {
       toast.error("You can't like your listings");
       return;
     }
 
     setLiked(true);
-    fetch(`https://flatify-server.vercel.app/flatify/like/${roommate._id}`, {
-      method: "put",
+    fetch(`http://localhost:3000/flatify/like/${roommate._id}`, {
+      method: "PATCH",
     })
       .then((res) => res.json())
       .then((data) => {

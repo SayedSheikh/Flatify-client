@@ -89,20 +89,46 @@ const Navbar = ({ theme, setTheme }) => {
         </NavLink>
       </li>
       <li className="w-fit">
-        <NavLink to="/AddListing" className=" rounded-none">
-          Add Listing
-        </NavLink>
-      </li>
-      <li className="w-fit">
         <NavLink to="/BrowseListing" className=" rounded-none">
           Browse Listing
         </NavLink>
       </li>
       <li className="w-fit">
-        <NavLink to="/MyListings" className=" rounded-none">
-          My Listings
+        <NavLink to="/aboutus" className=" rounded-none">
+          AboutUs
         </NavLink>
       </li>
+      <li className="w-fit">
+        <NavLink to="/contact" className=" rounded-none">
+          Contatct
+        </NavLink>
+      </li>
+      <li className="w-fit">
+        <NavLink to="/support" className=" rounded-none">
+          Support
+        </NavLink>
+      </li>
+      {user && (
+        <>
+          <li className="w-fit">
+            <NavLink to="/AddListing" className=" rounded-none">
+              Add Listing
+            </NavLink>
+          </li>
+
+          <li className="w-fit">
+            <NavLink to="/MyListings" className=" rounded-none">
+              My Listings
+            </NavLink>
+          </li>
+
+          <li className="w-fit">
+            <NavLink to="/dashboard" className=" rounded-none">
+              Dashboard
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (

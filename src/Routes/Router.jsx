@@ -11,6 +11,14 @@ import Update from "../Pages/Update";
 import Error from "../Pages/Error";
 import PrivateRoute from "../Pages/PrivateRoute";
 import Loading from "../Components/Loading/Loading";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import MyListings from "../Pages/Dashboard/MyListings/MyListings";
+import MyListingUpdate from "../Pages/Dashboard/MyListingUpdate/MyListingUpdate";
+import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
+import DashboardHome from "../Pages/Dashboard/Home/DashboardHome";
+import AboutUs from "../Pages/AboutUs";
+import Support from "../Pages/Support";
+import ContactUs from "../Pages/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: "/BrowseListing",
         Component: BrowseListing,
-        loader: () => fetch("https://flatify-server.vercel.app/flatify"),
+        loader: () => fetch("http://localhost:3000/flatify"),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
@@ -49,7 +57,7 @@ const router = createBrowserRouter([
       {
         path: "/MyListings/update/:id",
         loader: ({ params }) =>
-          fetch(`https://flatify-server.vercel.app/flatify/${params.id}`),
+          fetch(`http://localhost:3000/flatify/${params.id}`),
 
         hydrateFallbackElement: <Loading></Loading>,
         element: (
@@ -67,7 +75,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://flatify-server.vercel.app/flatify/${params.id}`),
+          fetch(`http://localhost:3000/flatify/${params.id}`),
 
         hydrateFallbackElement: <Loading></Loading>,
       },
@@ -78,6 +86,75 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         Component: SignUp,
+      },
+      {
+        path: "/aboutus",
+        Component: AboutUs,
+      },
+      {
+        path: "/support",
+        Component: Support,
+      },
+      {
+        path: "/contact",
+        Component: ContactUs,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        index: true,
+        Component: Dashboard,
+      },
+      {
+        path: "/dashboard/home",
+        Component: DashboardHome,
+      },
+
+      {
+        path: "/dashboard/mylisting",
+        Component: MyListings,
+      },
+      {
+        path: "/dashboard/mylistingUpdate/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/flatify/${params.id}`),
+
+        hydrateFallbackElement: <Loading></Loading>,
+        Component: MyListingUpdate,
+      },
+      {
+        path: "/dashboard/mylistingUpdate",
+        element: (
+          <PrivateRoute>
+            <AddToFindListing></AddToFindListing>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/BrowseListing",
+        Component: BrowseListing,
+        loader: () => fetch("http://localhost:3000/flatify"),
+        hydrateFallbackElement: <Loading></Loading>,
+      },
+      {
+        path: "/dashboard/details/:id",
+        element: (
+          <PrivateRoute>
+            <Details></Details>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/flatify/${params.id}`),
+
+        hydrateFallbackElement: <Loading></Loading>,
       },
     ],
   },

@@ -1,36 +1,58 @@
 import React from "react";
 import { FaGithub } from "react-icons/fa6";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router"; // fixed import
+import lightLogo from "/nightLogo.png";
 
 const Footer = () => {
   const link = (
     <>
-      <NavLink to="/" className=" rounded-none">
+      <NavLink to="/" className="  text-md">
         Home
       </NavLink>
-
-      <NavLink to="/AddListing" className=" rounded-none">
+      <NavLink to="/AddListing" className="  text-md">
         Add Listing
       </NavLink>
-
-      <NavLink to="/BrowseListing" className=" rounded-none">
+      <NavLink to="/BrowseListing" className="  text-md">
         Browse Listing
       </NavLink>
-
-      <NavLink to="/MyListings" className=" rounded-none">
+      <NavLink to="/MyListings" className="  text-md">
         My Listings
       </NavLink>
     </>
   );
+
   return (
-    <footer className="footer footer-horizontal footer-center  rounded p-10 bg-black text-white">
-      <nav className="grid grid-flow-col gap-4">{link}</nav>
-      <nav>
-        <div className="grid grid-flow-col gap-4 items-center">
-          <a href="https://github.com/SayedSheikh" target="_blank">
-            <FaGithub size={25}></FaGithub>
+    <footer className="bg-black text-white py-10 px-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
+        {/* Logo */}
+        <div className="flex items-center justify-center sm:justify-start">
+          <Link to={"/"}>
+            <img
+              src={lightLogo}
+              alt="Flatify Logo"
+              className="h-20 mr-2 cursor-pointer"
+            />
+          </Link>
+        </div>
+
+        {/* Navigation Links */}
+        <nav className="flex justify-center gap-6 flex-wrap">{link}</nav>
+
+        {/* Social Icons */}
+        <div className="flex justify-center sm:justify-end gap-4">
+          <a
+            href="https://github.com/SayedSheikh"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-primary transition">
+            <FaGithub size={22} />
           </a>
-          <a href="https://www.youtube.com/c/ProgrammingHero" target="_blank">
+
+          <a
+            href="https://www.youtube.com/c/ProgrammingHero"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red-500 transition">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -40,9 +62,12 @@ const Footer = () => {
               <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
             </svg>
           </a>
+
           <a
             href="https://www.facebook.com/sayed.sheikh.413765"
-            target="_blank">
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-500 transition">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -53,13 +78,12 @@ const Footer = () => {
             </svg>
           </a>
         </div>
-      </nav>
-      <aside>
-        <p>
-          Copyright © {new Date().getFullYear()} - All right reserved by Flatify
-          Ltd
-        </p>
-      </aside>
+      </div>
+
+      {/* Footer Bottom */}
+      <div className="text-center mt-8 text-sm text-gray-400">
+        © {new Date().getFullYear()} Flatify Ltd. All rights reserved.
+      </div>
     </footer>
   );
 };

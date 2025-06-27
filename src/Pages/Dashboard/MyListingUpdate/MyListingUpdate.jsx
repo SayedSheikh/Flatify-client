@@ -1,39 +1,40 @@
-import React, { use, useState } from "react";
-import { AuthContext } from "../Contexts/AuthContext";
-import { Link, useLocation } from "react-router";
+import React, { use, useEffect, useState } from "react";
+import { Link, useLoaderData, useNavigate } from "react-router";
 import { IoReturnDownBack } from "react-icons/io5";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../../Contexts/AuthContext";
 
-const AddToFindListing = () => {
+const MyListingUpdate = () => {
   const { user } = use(AuthContext);
-  let to = "/";
+  const info = useLoaderData();
 
-  const location = useLocation();
+  const navigate = useNavigate();
 
-  if (location.pathname.split("/")[1] === "dashboard") {
-    to = "/dashboard";
-  }
+  useEffect(() => {
+    if (info.message === "Invalid ID format" || info === "") {
+      navigate("/MyListings");
+    }
+  }, [info, navigate]);
 
   const [formData, setFormData] = useState({
-    title: "",
-    location: "",
-    rentAmount: "",
-    roomType: "",
+    title: info?.title || "",
+    location: info?.location || "",
+    rentAmount: info?.rentAmount || "",
+    roomType: info?.roomType || "",
     lifestylePreferences: {
-      pets: false,
-      smoking: false,
-      nightOwl: false,
+      pets: info?.lifestylePreferences?.pets ?? false,
+      smoking: info?.lifestylePreferences?.smoking ?? false,
+      nightOwl: info?.lifestylePreferences?.nightOwl ?? false,
     },
-    description: "",
-    contactInfo: "",
-    availability: true,
-    liked: 0,
+    description: info?.description || "",
+    contactInfo: info?.contactInfo || "",
+    availability: info?.availability || "",
+    liked: info?.liked || 0,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -56,8 +57,8 @@ const AddToFindListing = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/flatify", {
-      method: "post",
+    fetch(`http://localhost:3000/flatify/${info._id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
@@ -65,32 +66,18 @@ const AddToFindListing = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
+        if (data.modifiedCount) {
           Swal.fire({
             icon: "success",
             title: "Your work has been saved",
             showConfirmButton: false,
             timer: 1500,
           });
-          setFormData({
-            title: "",
-            location: "",
-            rentAmount: "",
-            roomType: "",
-            lifestylePreferences: {
-              pets: false,
-              smoking: false,
-              nightOwl: false,
-            },
-            description: "",
-            contactInfo: "",
-            availability: true,
-          });
+        } else {
+          toast.error("no modification");
         }
       })
-      .catch(() => toast.error("error occured"));
-
-    // TODO: Send `formData` to the backend API
+      .catch(() => toast.error("Error occured"));
   };
   if (!user)
     return (
@@ -99,13 +86,15 @@ const AddToFindListing = () => {
       </div>
     );
   return (
-    <div className="max-w-4xl mx-auto w-11/12 my-[60px] mb-[100px]">
-      <title>FlaTify | Add Listing</title>
-      <Link to={to} className="flex items-center text-2xl text-primary">
+    <div className="max-w-4xl mx-auto w-11/12 my-[40px]">
+      <title>FlaTify | Update</title>
+      <Link
+        to={"/dashboard/mylisting"}
+        className="flex items-center text-2xl text-primary">
         <IoReturnDownBack className="self-end" />
         Back
       </Link>
-      <div className=" p-8 shadow-lg bg-white dark:bg-base-200 rounded-xl my-[30px]">
+      <div className=" p-8 shadow-lg bg-white dark:bg-base-200 rounded-xl my-[40px]">
         <h2 className="text-2xl font-bold mb-6 text-center text-secondary">
           Add Roommate Listing
         </h2>
@@ -139,7 +128,7 @@ const AddToFindListing = () => {
           <div>
             <label className="label">Rent Amount</label>
             <input
-              type="number"
+              type="text"
               name="rentAmount"
               placeholder="Rent Amount"
               value={formData.rentAmount}
@@ -197,7 +186,7 @@ const AddToFindListing = () => {
           />
 
           <input
-            type="text"
+            type="number"
             name="contactInfo"
             placeholder="Contact Number"
             value={formData.contactInfo}
@@ -243,7 +232,7 @@ const AddToFindListing = () => {
           <button
             type="submit"
             className="btn btn-primary w-full md:col-span-2">
-            Submit Listing
+            Update
           </button>
         </form>
       </div>
@@ -251,4 +240,4 @@ const AddToFindListing = () => {
   );
 };
 
-export default AddToFindListing;
+export default MyListingUpdate;

@@ -13,7 +13,7 @@ const Reviews = () => {
   // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://flatify-server.vercel.app/reviews")
+    fetch("http://localhost:3000/reviews")
       .then((res) => res.json())
       .then((data) => {
         setUserReview(data);
@@ -35,7 +35,7 @@ const Reviews = () => {
         location: area,
         name: user?.displayName || "",
       };
-      fetch("https://flatify-server.vercel.app/reviews", {
+      fetch("http://localhost:3000/reviews", {
         method: "post",
         headers: {
           "content-type": "application/json",
