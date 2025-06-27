@@ -1,22 +1,40 @@
-import React from "react";
+import React, { use } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { Link, NavLink } from "react-router"; // fixed import
 import lightLogo from "/nightLogo.png";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 const Footer = () => {
+  const { user } = use(AuthContext);
   const link = (
     <>
       <NavLink to="/" className="  text-md">
         Home
       </NavLink>
-      <NavLink to="/AddListing" className="  text-md">
-        Add Listing
+      {user && (
+        <>
+          <NavLink to="/AddListing" className="  text-md">
+            Add Listing
+          </NavLink>
+          <NavLink to="/BrowseListing" className="  text-md">
+            Browse Listing
+          </NavLink>
+          <NavLink to="/MyListings" className="  text-md">
+            My Listings
+          </NavLink>
+        </>
+      )}
+
+      <NavLink to="/aboutus" className=" rounded-none">
+        AboutUs
       </NavLink>
-      <NavLink to="/BrowseListing" className="  text-md">
-        Browse Listing
+
+      <NavLink to="/contact" className=" rounded-none">
+        Contatct
       </NavLink>
-      <NavLink to="/MyListings" className="  text-md">
-        My Listings
+
+      <NavLink to="/support" className=" rounded-none">
+        Support
       </NavLink>
     </>
   );

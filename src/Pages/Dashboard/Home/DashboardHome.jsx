@@ -12,6 +12,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import Chart from "./Chart";
 
 const DashboardHome = () => {
   const { user } = useContext(AuthContext);
@@ -142,20 +143,12 @@ const DashboardHome = () => {
       </div>
 
       {/* Chart Section */}
-      {/* <div className="border bg-base-200 p-6 rounded-lg shadow mb-10">
+      <div className="bg-base-200 p-6 rounded-lg shadow mb-10">
         <h3 className="text-xl font-semibold mb-4 text-center text-secondary">
           Listings Breakdown
         </h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis domain={["auto", "auto"]} />
-            <Tooltip />
-            <Bar dataKey="count" fill="#a246e5" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div> */}
+        <Chart chartData={chartData}></Chart>
+      </div>
 
       {/* User Info */}
       <div className="bg-base-200 rounded-lg p-6 shadow flex items-center gap-6">

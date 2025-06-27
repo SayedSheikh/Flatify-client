@@ -11,10 +11,7 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     if (location.pathname.split("/")[1] === "dashboard") {
-      document
-        .getElementsByTagName("html")[0]
-        .setAttribute("data-theme", "dark");
-      // document.get
+      document.documentElement.setAttribute("data-theme", "dark");
     }
   }, [location]);
 
@@ -44,8 +41,8 @@ const DashboardLayout = () => {
 
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col ">
-          <div className="navbar bg-base-300 w-full lg:hidden">
+        <div className="drawer-content flex flex-col  ">
+          <div className="fixed top-0 shadow shadow-primary navbar bg-base-300 w-full lg:hidden">
             <div className="flex-none ">
               <label
                 htmlFor="my-drawer-2"
@@ -64,7 +61,7 @@ const DashboardLayout = () => {
                 </svg>
               </label>
             </div>
-            <div className="mx-2 flex-1 px-2">Navbar Title</div>
+            <div className="mx-2 flex-1 px-2">Flatify</div>
           </div>
           {/* Page content here */}
           <div className="overflow-hidden">

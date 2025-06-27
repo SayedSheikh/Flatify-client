@@ -93,21 +93,7 @@ const Navbar = ({ theme, setTheme }) => {
           Browse Listing
         </NavLink>
       </li>
-      <li className="w-fit">
-        <NavLink to="/aboutus" className=" rounded-none">
-          AboutUs
-        </NavLink>
-      </li>
-      <li className="w-fit">
-        <NavLink to="/contact" className=" rounded-none">
-          Contatct
-        </NavLink>
-      </li>
-      <li className="w-fit">
-        <NavLink to="/support" className=" rounded-none">
-          Support
-        </NavLink>
-      </li>
+
       {user && (
         <>
           <li className="w-fit">
@@ -129,6 +115,22 @@ const Navbar = ({ theme, setTheme }) => {
           </li>
         </>
       )}
+
+      <li className="w-fit">
+        <NavLink to="/aboutus" className=" rounded-none">
+          AboutUs
+        </NavLink>
+      </li>
+      <li className="w-fit">
+        <NavLink to="/contact" className=" rounded-none">
+          Contatct
+        </NavLink>
+      </li>
+      <li className="w-fit">
+        <NavLink to="/support" className=" rounded-none">
+          Support
+        </NavLink>
+      </li>
     </>
   );
   return (
